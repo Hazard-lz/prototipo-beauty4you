@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEAUTY4YOU - Novo Agendamento (Balcão & Equipe)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              plum: '#3a2a35',
+              primary: '#e66d98',
+              rose: '#f29bb6',
+              blush: '#f6b7c9',
+              mint: '#c9f2e6',
+              mintDark: '#1c5344',
+              softBg: '#fdf6f8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style> body { font-family: 'Plus Jakarta Sans', sans-serif; } </style>
+</head>
+<body class="bg-[#faf2f5] flex min-h-screen text-brand-plum selection:bg-brand-primary selection:text-white">
+
+  <!-- Sidebar Desktop (md+) - Fixa com Ordem Padronizada -->
+  <aside class="w-64 bg-brand-plum text-white flex flex-col justify-between p-6 shrink-0 hidden md:flex shadow-xl shadow-brand-plum/20 sticky top-0 h-screen overflow-y-auto">
+    <div>
+      <div class="pb-6 border-b border-[#523d4c]">
+        <div class="bg-white rounded-2xl p-2.5 shadow-sm mb-3 flex items-center justify-center">
+          <img src="assets/img/logo_cropped.png" alt="Beauty4You" class="h-9 object-contain drop-shadow-sm">
+        </div>
+        <span class="text-[10px] text-brand-blush uppercase tracking-widest font-bold">Painel Operacional</span>
+      </div>
+      <nav class="mt-6 space-y-1.5">
+        <a href="agenda.html" class="flex items-center gap-3 px-3.5 py-3 text-brand-blush/80 hover:text-white hover:bg-[#4d3947] rounded-xl font-semibold text-sm transition">
+          <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <span>Minha Agenda</span>
+        </a>
+        <a href="novo_agendamento.html" class="flex items-center gap-3 px-3.5 py-3 bg-brand-primary text-white rounded-xl font-bold text-sm shadow-md shadow-brand-primary/30">
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          <span>Novo Agendamento</span>
+        </a>
+        <a href="disponibilidade.html" class="flex items-center gap-3 px-3.5 py-3 text-brand-blush/80 hover:text-white hover:bg-[#4d3947] rounded-xl font-semibold text-sm transition">
+          <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Disponibilidade & Escalas</span>
+        </a>
+        <a href="admin.html" class="flex items-center gap-3 px-3.5 py-3 text-brand-blush/80 hover:text-white hover:bg-[#4d3947] rounded-xl font-semibold text-sm transition">
+          <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          <span>Painel Administrativo</span>
+        </a>
+        <a href="index.html" class="flex items-center gap-3 px-3.5 py-3 text-brand-blush/70 hover:text-white hover:bg-[#4d3947] rounded-xl font-semibold text-sm transition">
+          <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          <span>Hub</span>
+        </a>
+      </nav>
+    </div>
+    <div class="pt-6 border-t border-[#523d4c] flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-brand-primary text-white flex items-center justify-center font-bold text-xs shadow-sm">CM</div>
+        <div>
+          <p class="text-xs font-bold leading-tight">Clara Mendes</p>
+          <p class="text-[10px] text-brand-blush/70">Cabeleireira Master</p>
+        </div>
+      </div>
+      <a href="login.html" class="text-xs text-brand-rose hover:text-white font-bold transition">Sair</a>
+    </div>
+  </aside>
+
+  <!-- Mobile Drawer Backdrop & Menu (< md) -->
+  <div id="mobileDrawer" class="fixed inset-0 z-50 hidden transition-opacity duration-300">
+    <div onclick="toggleMobileDrawer()" class="fixed inset-0 bg-brand-plum/60 backdrop-blur-sm"></div>
+    <div class="fixed inset-y-0 left-0 w-72 max-w-[85%] bg-brand-plum text-white shadow-2xl flex flex-col justify-between p-6 z-10">
+      <div>
+        <div class="pb-6 border-b border-[#523d4c] flex items-center justify-between">
+          <div class="bg-white rounded-2xl p-2 shadow-sm flex items-center justify-center">
+            <img src="assets/img/logo_cropped.png" alt="Beauty4You" class="h-8 object-contain">
+          </div>
+          <button onclick="toggleMobileDrawer()" class="text-brand-blush/70 hover:text-white p-2 rounded-xl text-lg font-bold">✕</button>
+        </div>
+        <nav class="mt-6 space-y-1.5">
+          <a href="agenda.html" class="flex items-center gap-3 px-3.5 py-3 text-brand-blush/80 hover:text-white hover:bg-[#4d3947] rounded-xl font-semibold text-sm transition">
+            <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <span>Minha Agenda</span>
+          </a>
+          <a href="novo_agendamento.html" class="flex items-center gap-3 px-3.5 py-3 bg-brand-primary text-white rounded-xl font-bold text-sm shadow-md">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Novo Agendamento</span>
+          </a>
+          <a href="disponibilidade.html" class="flex items-center gap-3 px-3.5 py-3 text-brand-blush/80 hover:text-white hover:bg-[#4d3947] rounded-xl font-semibold text-sm transition">
+            <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>Disponibilidade & Escalas</span>
+          </a>
+          <a href="admin.html" class="flex items-center gap-3 px-3.5 py-3 text-brand-blush/80 hover:text-white hover:bg-[#4d3947] rounded-xl font-semibold text-sm transition">
+            <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            <span>Painel Administrativo</span>
+          </a>
+          <a href="index.html" class="flex items-center gap-3 px-3.5 py-3 text-brand-blush/80 hover:text-white hover:bg-[#4d3947] rounded-xl font-semibold text-sm transition">
+            <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            <span>Hub</span>
+          </a>
+        </nav>
+      </div>
+      <div class="pt-6 border-t border-[#523d4c] flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-brand-primary text-white flex items-center justify-center font-bold text-xs shadow-sm">CM</div>
+          <div>
+            <p class="text-xs font-bold leading-tight">Clara Mendes</p>
+            <p class="text-[10px] text-brand-blush/70">Cabeleireira Master</p>
+          </div>
+        </div>
+        <a href="login.html" class="text-xs text-brand-rose hover:text-white font-bold transition">Sair</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conteúdo Principal -->
+  <main class="flex-1 flex flex-col min-w-0 pb-20">
+    
+    <!-- Topbar com Ações e Menu Hambúrguer -->
+    <header class="bg-white border-b border-brand-blush/30 px-4 sm:px-8 py-4 sm:py-5 flex items-center justify-between shadow-sm sticky top-0 z-30">
+      <div class="flex items-center gap-3 sm:gap-4">
+        <!-- Botão Menu Hambúrguer (Mobile) -->
+        <button onclick="toggleMobileDrawer()" class="md:hidden p-2 rounded-xl bg-brand-softBg text-brand-plum border border-brand-blush/50 hover:bg-brand-rose/20 transition flex items-center justify-center">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+
+        <div>
+          <h2 class="text-lg sm:text-xl font-black uppercase tracking-wider text-brand-plum">NOVO AGENDAMENTO</h2>
+          <span class="text-xs font-bold text-brand-plum/60">Lançamento de Balcão & Atendimento Presencial / Telefone</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 text-xs font-bold">
+        <span class="text-brand-plum/70 hidden sm:inline">OPERADOR: CLARA MENDES</span>
+        <div class="w-9 h-9 rounded-full bg-brand-plum text-brand-blush border-2 border-brand-rose flex items-center justify-center font-bold text-xs shadow-sm">CM</div>
+      </div>
+    </header>
+
+    <!-- Formulário de Balcão para o Funcionário -->
+    <div class="p-4 sm:p-8 max-w-6xl mx-auto w-full space-y-6">
+
+      <!-- Banner de Contexto Operacional -->
+      <div class="bg-white p-4 sm:p-6 rounded-3xl border border-brand-blush/40 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-brand-mint text-brand-mintDark flex items-center justify-center font-black text-lg shadow-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-sm text-brand-plum uppercase tracking-wider">Agendamento Interno pelo Profissional / Recepção</h3>
+            <p class="text-xs text-brand-plum/70 mt-0.5">Cadastre horários de clientes que agendaram por telefone, WhatsApp ou balcão físico.</p>
+          </div>
+        </div>
+        <a href="agenda.html" class="px-4 py-2 bg-brand-softBg hover:bg-brand-blush/30 text-brand-plum rounded-xl text-xs font-bold border border-brand-blush/60 transition flex items-center gap-1.5 shrink-0">
+          <svg class="w-4 h-4 text-brand-plum/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+          <span>Voltar para Agenda</span>
+        </a>
+      </div>
+
+      <form onsubmit="event.preventDefault(); submitStaffBooking();" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- Coluna Esquerda: Cliente, Profissional & Serviços -->
+        <div class="lg:col-span-2 space-y-6">
+
+          <!-- 1. Identificação do Cliente -->
+          <div class="bg-white p-6 rounded-3xl border border-brand-blush/40 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b border-brand-blush/20 pb-3">
+              <h3 class="font-black text-xs uppercase tracking-wider text-brand-plum flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-brand-primary"></span>
+                1. Identificação do Cliente
+              </h3>
+              <span class="text-[10px] text-brand-mintDark font-bold bg-brand-mint/50 px-2 py-0.5 rounded-full">Base Cadastral</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-bold">
+              <div>
+                <label class="block text-brand-plum/70 uppercase mb-1.5">Selecionar Cliente Registrado</label>
+                <select id="staffClientSelect" onchange="handleClientChange(this.value)" class="w-full p-3 bg-brand-softBg rounded-xl border border-brand-rose/40 text-brand-plum font-semibold outline-none focus:ring-2 focus:ring-brand-primary cursor-pointer">
+                  <option value="Mariana Bastos|(11) 98844-2121|mariana.bastos@exemplo.com">Mariana Bastos • (11) 98844-2121</option>
+                  <option value="Rodrigo Souza|(11) 97722-1133|rodrigo.souza@exemplo.com">Rodrigo Souza • (11) 97722-1133</option>
+                  <option value="Aline Guimarães|(11) 99882-3344|aline.guimaraes@exemplo.com">Aline Guimarães • (11) 99882-3344</option>
+                  <option value="NOVO">+ Cadastrar Novo Cliente no Balcão</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-brand-plum/70 uppercase mb-1.5">Telefone / WhatsApp</label>
+                <input type="text" id="staffClientPhone" value="(11) 98844-2121" required class="w-full p-3 bg-brand-softBg rounded-xl border border-brand-rose/40 text-brand-plum font-medium outline-none focus:ring-2 focus:ring-brand-primary">
+              </div>
+            </div>
+
+            <div id="newClientField" class="hidden">
+              <label class="block text-brand-plum/70 uppercase mb-1.5 text-xs font-bold">Nome Completo do Novo Cliente</label>
+              <input type="text" id="staffNewClientName" placeholder="Ex: Fernanda Lima" class="w-full p-3 bg-brand-softBg rounded-xl border border-brand-rose/40 text-brand-plum text-xs font-medium outline-none focus:ring-2 focus:ring-brand-primary">
+            </div>
+          </div>
+
+          <!-- 2. Profissional Responsável -->
+          <div class="bg-white p-6 rounded-3xl border border-brand-blush/40 shadow-sm space-y-4">
+            <h3 class="font-black text-xs uppercase tracking-wider text-brand-plum flex items-center gap-2 border-b border-brand-blush/20 pb-3">
+              <span class="w-2.5 h-2.5 rounded-full bg-brand-primary"></span>
+              2. Profissional que Executará o Procedimento
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="staffProContainer">
+              <label class="staff-pro-card flex items-center gap-3 p-3.5 rounded-2xl border-2 border-brand-primary bg-brand-softBg cursor-pointer transition shadow-sm">
+                <input type="radio" name="staffPro" value="Clara Mendes" checked onchange="handleStaffProChange(this)" class="text-brand-primary focus:ring-brand-primary w-4 h-4">
+                <div class="w-9 h-9 rounded-full bg-brand-primary text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-sm">CM</div>
+                <div>
+                  <h4 class="font-bold text-xs text-brand-plum">Clara Mendes</h4>
+                  <p class="text-[11px] text-brand-plum/60">Cabeleireira & Visagista Master</p>
+                </div>
+              </label>
+              <label class="staff-pro-card flex items-center gap-3 p-3.5 rounded-2xl border border-brand-blush/50 hover:border-brand-primary/60 bg-white cursor-pointer transition">
+                <input type="radio" name="staffPro" value="Lucas Viana" onchange="handleStaffProChange(this)" class="text-brand-primary focus:ring-brand-primary w-4 h-4">
+                <div class="w-9 h-9 rounded-full bg-brand-plum text-brand-blush font-bold text-xs flex items-center justify-center shrink-0 shadow-sm">LV</div>
+                <div>
+                  <h4 class="font-bold text-xs text-brand-plum">Lucas Viana</h4>
+                  <p class="text-[11px] text-brand-plum/60">Barbeiro & Terapeuta Capilar</p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- 3. Seleção de Procedimentos -->
+          <div class="bg-white p-6 rounded-3xl border border-brand-blush/40 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b border-brand-blush/20 pb-3">
+              <h3 class="font-black text-xs uppercase tracking-wider text-brand-plum flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-brand-primary"></span>
+                3. Serviços Solicitados
+              </h3>
+              <span class="text-[10px] text-brand-plum/60 font-bold">Marque um ou mais</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <label class="service-checkbox flex items-start gap-3 p-3.5 rounded-2xl border border-brand-blush/40 hover:border-brand-primary/60 bg-white cursor-pointer transition">
+                <input type="checkbox" onchange="toggleStaffService(this)" data-name="Corte Masculino & Degradê" data-price="55" data-duration="35" class="mt-0.5 text-brand-primary focus:ring-brand-primary rounded w-4 h-4">
+                <div>
+                  <div class="flex justify-between items-center w-full">
+                    <span class="font-bold text-brand-plum">Corte Masculino & Degradê</span>
+                  </div>
+                  <span class="text-brand-primary font-extrabold text-[11px] block mt-0.5">R$ 55,00 • 35 min</span>
+                </div>
+              </label>
+
+              <label class="service-checkbox flex items-start gap-3 p-3.5 rounded-2xl border border-brand-blush/40 hover:border-brand-primary/60 bg-white cursor-pointer transition">
+                <input type="checkbox" onchange="toggleStaffService(this)" data-name="Barboterapia Tradicional" data-price="45" data-duration="30" class="mt-0.5 text-brand-primary focus:ring-brand-primary rounded w-4 h-4">
+                <div>
+                  <span class="font-bold text-brand-plum">Barboterapia Tradicional</span>
+                  <span class="text-brand-primary font-extrabold text-[11px] block mt-0.5">R$ 45,00 • 30 min</span>
+                </div>
+              </label>
+
+              <label class="service-checkbox flex items-start gap-3 p-3.5 rounded-2xl border-2 border-brand-primary bg-brand-softBg cursor-pointer transition">
+                <input type="checkbox" checked onchange="toggleStaffService(this)" data-name="Corte & Escova Modelada" data-price="130" data-duration="45" class="mt-0.5 text-brand-primary focus:ring-brand-primary rounded w-4 h-4">
+                <div>
+                  <span class="font-bold text-brand-plum">Corte & Escova Modelada</span>
+                  <span class="text-brand-primary font-extrabold text-[11px] block mt-0.5">R$ 130,00 • 45 min</span>
+                </div>
+              </label>
+
+              <label class="service-checkbox flex items-start gap-3 p-3.5 rounded-2xl border border-brand-blush/40 hover:border-brand-primary/60 bg-white cursor-pointer transition">
+                <input type="checkbox" onchange="toggleStaffService(this)" data-name="Coloração & Tonalização" data-price="140" data-duration="60" class="mt-0.5 text-brand-primary focus:ring-brand-primary rounded w-4 h-4">
+                <div>
+                  <span class="font-bold text-brand-plum">Coloração & Tonalização</span>
+                  <span class="text-brand-primary font-extrabold text-[11px] block mt-0.5">R$ 140,00 • 60 min</span>
+                </div>
+              </label>
+
+              <label class="service-checkbox flex items-start gap-3 p-3.5 rounded-2xl border border-brand-blush/40 hover:border-brand-primary/60 bg-white cursor-pointer transition">
+                <input type="checkbox" onchange="toggleStaffService(this)" data-name="Design de Sobrancelhas" data-price="40" data-duration="25" class="mt-0.5 text-brand-primary focus:ring-brand-primary rounded w-4 h-4">
+                <div>
+                  <span class="font-bold text-brand-plum">Design de Sobrancelhas</span>
+                  <span class="text-brand-primary font-extrabold text-[11px] block mt-0.5">R$ 40,00 • 25 min</span>
+                </div>
+              </label>
+
+              <label class="service-checkbox flex items-start gap-3 p-3.5 rounded-2xl border border-brand-blush/40 hover:border-brand-primary/60 bg-white cursor-pointer transition">
+                <input type="checkbox" onchange="toggleStaffService(this)" data-name="Hidratação Profunda & Nutrição" data-price="95" data-duration="40" class="mt-0.5 text-brand-primary focus:ring-brand-primary rounded w-4 h-4">
+                <div>
+                  <span class="font-bold text-brand-plum">Hidratação Profunda & Nutrição</span>
+                  <span class="text-brand-primary font-extrabold text-[11px] block mt-0.5">R$ 95,00 • 40 min</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- 4. Observações Técnicas -->
+          <div class="bg-white p-6 rounded-3xl border border-brand-blush/40 shadow-sm space-y-2">
+            <label class="block text-xs font-black uppercase tracking-wider text-brand-plum">Observações Técnicas / Preferências do Cliente</label>
+            <textarea id="staffNotes" rows="2" placeholder="Ex: Cliente tem couro cabeludo sensível; prefere água morna; cabelo com luzes prévias." class="w-full p-3 bg-brand-softBg rounded-xl border border-brand-rose/40 text-xs font-medium text-brand-plum outline-none focus:ring-2 focus:ring-brand-primary"></textarea>
+          </div>
+
+        </div>
+
+        <!-- Coluna Direita: Data, Horário & Fechamento -->
+        <div class="space-y-6">
+
+          <div class="bg-white p-6 rounded-3xl border border-brand-blush/40 shadow-sm space-y-5">
+            <h3 class="font-black text-xs uppercase tracking-wider text-brand-plum border-b border-brand-blush/20 pb-3 flex items-center justify-between">
+              <span>Data & Horário na Grade</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-brand-primary"></span>
+            </h3>
+
+            <!-- Seletor de Data -->
+            <div>
+              <label class="block text-xs font-bold text-brand-plum/70 uppercase mb-2">Dia da Semana</label>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <button type="button" onclick="selectStaffDate('Quarta, 23/09', this)" class="staff-date-btn p-2.5 rounded-xl border-2 border-brand-primary bg-brand-primary text-white font-bold text-center">
+                  Hoje (23/09)
+                </button>
+                <button type="button" onclick="selectStaffDate('Quinta, 24/09', this)" class="staff-date-btn p-2.5 rounded-xl border border-brand-blush/60 bg-brand-softBg text-brand-plum font-bold text-center hover:border-brand-primary">
+                  Amanhã (24/09)
+                </button>
+                <button type="button" onclick="selectStaffDate('Sexta, 25/09', this)" class="staff-date-btn p-2.5 rounded-xl border border-brand-blush/60 bg-brand-softBg text-brand-plum font-bold text-center hover:border-brand-primary">
+                  Sexta (25/09)
+                </button>
+                <button type="button" onclick="selectStaffDate('Sábado, 26/09', this)" class="staff-date-btn p-2.5 rounded-xl border border-brand-blush/60 bg-brand-softBg text-brand-plum font-bold text-center hover:border-brand-primary">
+                  Sábado (26/09)
+                </button>
+              </div>
+            </div>
+
+            <!-- Seletor de Horário Livre -->
+            <div>
+              <label class="block text-xs font-bold text-brand-plum/70 uppercase mb-2">Horários Disponíveis (com 10m de limpeza)</label>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <button type="button" onclick="selectStaffTime('09:00', this)" class="staff-time-btn p-2.5 rounded-xl border-2 border-brand-primary bg-brand-softBg font-extrabold text-brand-plum text-center">
+                  09:00
+                </button>
+                <button type="button" onclick="selectStaffTime('10:15', this)" class="staff-time-btn p-2.5 rounded-xl border border-brand-blush/60 bg-white font-bold text-brand-plum text-center hover:border-brand-primary">
+                  10:15
+                </button>
+                <button type="button" onclick="selectStaffTime('11:30', this)" class="staff-time-btn p-2.5 rounded-xl border border-brand-blush/60 bg-white font-bold text-brand-plum text-center hover:border-brand-primary">
+                  11:30
+                </button>
+                <button type="button" onclick="selectStaffTime('14:00', this)" class="staff-time-btn p-2.5 rounded-xl border border-brand-blush/60 bg-white font-bold text-brand-plum text-center hover:border-brand-primary">
+                  14:00
+                </button>
+                <button type="button" onclick="selectStaffTime('15:30', this)" class="staff-time-btn p-2.5 rounded-xl border border-brand-blush/60 bg-white font-bold text-brand-plum text-center hover:border-brand-primary">
+                  15:30
+                </button>
+                <button type="button" onclick="selectStaffTime('17:00', this)" class="staff-time-btn p-2.5 rounded-xl border border-brand-blush/60 bg-white font-bold text-brand-plum text-center hover:border-brand-primary">
+                  17:00
+                </button>
+              </div>
+            </div>
+
+            <!-- Condição de Pagamento -->
+            <div class="pt-2 border-t border-brand-blush/20">
+              <label class="block text-xs font-bold text-brand-plum/70 uppercase mb-1.5">Pagamento Acordado</label>
+              <select id="staffPayment" class="w-full p-2.5 bg-brand-softBg rounded-xl border border-brand-rose/40 text-xs font-semibold text-brand-plum outline-none focus:ring-2 focus:ring-brand-primary">
+                <option>Pagar no Balcão (Cartão / Dinheiro)</option>
+                <option>Pix Balcão na Recepção</option>
+                <option>Adiantamento Pago</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Resumo Financeiro & Lançamento -->
+          <div class="bg-white p-6 rounded-3xl border border-brand-blush/40 shadow-sm space-y-4">
+            <h4 class="text-xs font-black uppercase tracking-wider text-brand-plum/70">Resumo da Reserva</h4>
+            
+            <div class="space-y-2 text-xs">
+              <div class="flex justify-between text-brand-plum/70">
+                <span>Profissional Selecionado:</span>
+                <span id="txtStaffPro" class="font-bold text-brand-plum">Clara Mendes</span>
+              </div>
+              <div class="flex justify-between text-brand-plum/70">
+                <span>Duração do Atendimento:</span>
+                <span id="txtStaffDuration" class="font-bold text-brand-plum">45 min</span>
+              </div>
+              <div class="flex justify-between text-brand-mintDark font-semibold">
+                <span>Intervalo de Higienização:</span>
+                <span class="font-bold">+10 min</span>
+              </div>
+              <div class="flex justify-between text-brand-plum font-extrabold pt-2 border-t border-dashed border-brand-blush/40">
+                <span>Bloqueio na Grade:</span>
+                <span id="txtStaffTotalTime" class="font-bold text-brand-plum">55 min</span>
+              </div>
+              <div class="flex justify-between items-center pt-2">
+                <span class="font-black text-xs uppercase text-brand-plum/70">Valor Total:</span>
+                <span id="txtStaffTotalPrice" class="text-2xl font-black text-brand-primary">R$ 130,00</span>
+              </div>
+            </div>
+
+            <div class="pt-2 space-y-2">
+              <button type="submit" class="w-full py-3.5 bg-brand-primary hover:bg-[#d65784] text-white rounded-xl text-xs font-black uppercase tracking-wider transition shadow-lg shadow-brand-primary/25 active:scale-95 flex items-center justify-center gap-2">
+                <span>Confirmar & Inserir na Agenda</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+              </button>
+              <a href="agenda.html" class="block text-center w-full py-2.5 bg-brand-softBg hover:bg-brand-blush/30 text-brand-plum rounded-xl text-xs font-bold uppercase tracking-wider border border-brand-blush/60 transition">
+                Cancelar e Voltar
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+  </main>
+
+  <!-- Modal de Confirmação de Sucesso -->
+  <div id="modalStaffSuccess" class="fixed inset-0 z-50 bg-brand-plum/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-brand-blush/50 space-y-5 text-center relative">
+      <div class="w-16 h-16 rounded-full bg-brand-mint text-brand-mintDark flex items-center justify-center mx-auto shadow-inner">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+      </div>
+      <div>
+        <span class="text-[10px] font-black uppercase tracking-widest text-brand-mintDark bg-brand-mint/50 px-3 py-1 rounded-full border border-brand-mintDark/15">
+          Agendamento Registrado
+        </span>
+        <h3 class="text-2xl font-black uppercase text-brand-plum mt-3">Gravado com Sucesso!</h3>
+        <p class="text-xs text-brand-plum/70 leading-relaxed mt-2 font-medium">
+          O atendimento foi inserido na agenda com o buffer de 10 min de higienização devidamente bloqueado.
+        </p>
+      </div>
+
+      <div class="bg-brand-softBg p-4 rounded-2xl border border-brand-blush/40 text-left text-xs space-y-1.5">
+        <div class="flex justify-between">
+          <span class="text-brand-plum/60">Cliente:</span>
+          <span id="modalResClient" class="font-extrabold text-brand-plum">Mariana Bastos</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-brand-plum/60">Profissional:</span>
+          <span id="modalResPro" class="font-bold text-brand-plum">Clara Mendes</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-brand-plum/60">Horário:</span>
+          <span id="modalResTime" class="font-bold text-brand-primary">Quarta, 23/09 às 09:00</span>
+        </div>
+      </div>
+
+      <div class="space-y-2 pt-2">
+        <a href="agenda.html" class="block w-full py-3 bg-brand-primary hover:bg-[#d65784] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition shadow-md shadow-brand-primary/25">
+          Visualizar na Grade da Agenda →
+        </a>
+        <button onclick="closeModalStaffSuccess()" class="w-full py-2 text-brand-plum/70 hover:text-brand-plum text-xs font-bold uppercase tracking-wider">
+          Lançar Outro Agendamento
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botão Flutuante de Menu (Canto Inferior Direito) -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <!-- Popover Menu (Abre exatamente em cima do botão) -->
+    <div id="floatingMenuPopover" class="hidden absolute bottom-14 right-0 w-64 bg-brand-plum/95 backdrop-blur-md text-white rounded-3xl p-3 shadow-2xl border border-brand-blush/30 flex-col space-y-1 transition-all duration-200">
+      <div class="px-3 py-2 border-b border-brand-blush/20 flex items-center justify-between">
+        <span class="text-[10px] font-black uppercase tracking-widest text-brand-blush">Navegação Rápida</span>
+        <button onclick="toggleFloatingMenu()" class="text-brand-blush/60 hover:text-white p-1 rounded-lg text-xs">✕</button>
+      </div>
+      <a href="index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        <span>Hub</span>
+      </a>
+      <a href="login.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        <span>Login</span>
+      </a>
+      <a href="servico.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+        <span>Agendamento Online (Cliente)</span>
+      </a>
+      <a href="agenda.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        <span>Minha Agenda</span>
+      </a>
+      <a href="novo_agendamento.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-brand-primary text-white text-xs font-bold transition shadow-sm">
+        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        <span>Novo Agendamento (Balcão)</span>
+      </a>
+      <a href="disponibilidade.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span>Disponibilidade & Escalas</span>
+      </a>
+      <a href="admin.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        <span>Painel Administrativo</span>
+      </a>
+    </div>
+
+    <!-- Botão Trigger: "Menu" -->
+    <button onclick="toggleFloatingMenu()" id="floatingMenuBtn" class="flex items-center gap-2 bg-brand-plum text-white hover:bg-[#281b24] px-4 py-3 rounded-2xl shadow-2xl border border-brand-blush/40 font-bold text-xs uppercase tracking-wider transition active:scale-95">
+      <svg class="w-4 h-4 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <span>Menu</span>
+    </button>
+  </div>
+
+  <script>
+    let staffSelectedServices = [
+      { name: "Corte & Escova Modelada", price: 130, duration: 45 }
+    ];
+    let staffChosenDate = "Quarta, 23/09";
+    let staffChosenTime = "09:00";
+
+    function toggleMobileDrawer() {
+      const drawer = document.getElementById('mobileDrawer');
+      drawer.classList.toggle('hidden');
+    }
+
+    function handleClientChange(val) {
+      const phoneInput = document.getElementById('staffClientPhone');
+      const newField = document.getElementById('newClientField');
+      if (val === 'NOVO') {
+        newField.classList.remove('hidden');
+        phoneInput.value = "";
+        phoneInput.placeholder = "(11) 90000-0000";
+      } else {
+        newField.classList.add('hidden');
+        const parts = val.split('|');
+        phoneInput.value = parts[1] || "";
+      }
+    }
+
+    function handleStaffProChange(radio) {
+      document.querySelectorAll('.staff-pro-card').forEach(card => {
+        card.className = "staff-pro-card flex items-center gap-3 p-3.5 rounded-2xl border border-brand-blush/50 hover:border-brand-primary/60 bg-white cursor-pointer transition";
+      });
+      const currentCard = radio.closest('.staff-pro-card');
+      if (currentCard) {
+        currentCard.className = "staff-pro-card flex items-center gap-3 p-3.5 rounded-2xl border-2 border-brand-primary bg-brand-softBg cursor-pointer transition shadow-sm";
+      }
+      updateSummaryStaff();
+    }
+
+    function toggleStaffService(checkbox) {
+      const name = checkbox.dataset.name;
+      const price = parseFloat(checkbox.dataset.price);
+      const duration = parseInt(checkbox.dataset.duration);
+
+      const label = checkbox.closest('label');
+
+      if (checkbox.checked) {
+        staffSelectedServices.push({ name, price, duration });
+        label.className = "service-checkbox flex items-start gap-3 p-3.5 rounded-2xl border-2 border-brand-primary bg-brand-softBg cursor-pointer transition";
+      } else {
+        staffSelectedServices = staffSelectedServices.filter(s => s.name !== name);
+        label.className = "service-checkbox flex items-start gap-3 p-3.5 rounded-2xl border border-brand-blush/40 hover:border-brand-primary/60 bg-white cursor-pointer transition";
+      }
+      updateSummaryStaff();
+    }
+
+    function selectStaffDate(dateStr, btn) {
+      staffChosenDate = dateStr;
+      document.querySelectorAll('.staff-date-btn').forEach(b => {
+        b.className = "staff-date-btn p-2.5 rounded-xl border border-brand-blush/60 bg-brand-softBg text-brand-plum font-bold text-center hover:border-brand-primary";
+      });
+      btn.className = "staff-date-btn p-2.5 rounded-xl border-2 border-brand-primary bg-brand-primary text-white font-bold text-center";
+    }
+
+    function selectStaffTime(timeStr, btn) {
+      staffChosenTime = timeStr;
+      document.querySelectorAll('.staff-time-btn').forEach(b => {
+        b.className = "staff-time-btn p-2.5 rounded-xl border border-brand-blush/60 bg-white font-bold text-brand-plum text-center hover:border-brand-primary";
+      });
+      btn.className = "staff-time-btn p-2.5 rounded-xl border-2 border-brand-primary bg-brand-softBg font-extrabold text-brand-plum text-center";
+    }
+
+    function updateSummaryStaff() {
+      const totalExec = staffSelectedServices.reduce((acc, s) => acc + s.duration, 0);
+      const totalCost = staffSelectedServices.reduce((acc, s) => acc + s.price, 0);
+      const buffer = staffSelectedServices.length > 0 ? 10 : 0;
+
+      const proRadio = document.querySelector('input[name="staffPro"]:checked');
+      if (proRadio && document.getElementById('txtStaffPro')) {
+        document.getElementById('txtStaffPro').textContent = proRadio.value;
+      }
+
+      document.getElementById('txtStaffDuration').textContent = `${totalExec} min`;
+      document.getElementById('txtStaffTotalTime').textContent = `${totalExec + buffer} min`;
+      document.getElementById('txtStaffTotalPrice').textContent = `R$ ${totalCost.toFixed(2)}`;
+    }
+
+    function submitStaffBooking() {
+      if (staffSelectedServices.length === 0) {
+        alert('Selecione pelo menos um serviço para lançar o agendamento.');
+        return;
+      }
+
+      const clientSelect = document.getElementById('staffClientSelect');
+      let clientName = "";
+      if (clientSelect.value === 'NOVO') {
+        clientName = document.getElementById('staffNewClientName').value || "Novo Cliente Balcão";
+      } else {
+        clientName = clientSelect.value.split('|')[0];
+      }
+
+      const proRadio = document.querySelector('input[name="staffPro"]:checked');
+      const proName = proRadio ? proRadio.value : "Clara Mendes";
+
+      document.getElementById('modalResClient').textContent = clientName;
+      document.getElementById('modalResPro').textContent = proName;
+      document.getElementById('modalResTime').textContent = `${staffChosenDate} às ${staffChosenTime}`;
+
+      const modal = document.getElementById('modalStaffSuccess');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModalStaffSuccess() {
+      const modal = document.getElementById('modalStaffSuccess');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function toggleFloatingMenu() {
+      const popover = document.getElementById('floatingMenuPopover');
+      if (popover.classList.contains('hidden')) {
+        popover.classList.remove('hidden');
+        popover.classList.add('flex');
+      } else {
+        popover.classList.add('hidden');
+        popover.classList.remove('flex');
+      }
+    }
+
+    document.addEventListener('click', function(e) {
+      const popover = document.getElementById('floatingMenuPopover');
+      const btn = document.getElementById('floatingMenuBtn');
+      if (!popover.contains(e.target) && !btn.contains(e.target) && !popover.classList.contains('hidden')) {
+        popover.classList.add('hidden');
+        popover.classList.remove('flex');
+      }
+    });
+
+    // Inicialização
+    const initialProRadio = document.querySelector('input[name="staffPro"]:checked');
+    if (initialProRadio) {
+      handleStaffProChange(initialProRadio);
+    } else {
+      updateSummaryStaff();
+    }
+  </script>
+</body>
+</html>

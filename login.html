@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEAUTY4YOU - Autenticação</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              plum: '#3a2a35',
+              primary: '#e66d98',
+              rose: '#f29bb6',
+              blush: '#f6b7c9',
+              mint: '#c9f2e6',
+              mintDark: '#1c5344',
+              softBg: '#fdf6f8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-[#fdf6f8] via-[#faeaef] to-[#f5dce4] min-h-screen flex flex-col items-center justify-center p-4 pb-20 relative selection:bg-brand-primary selection:text-white">
+
+  <!-- Link de Retorno ao Hub -->
+  <div class="w-full max-w-md mb-4 flex justify-between items-center z-10 px-1">
+    <a href="index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-plum/70 hover:text-brand-plum bg-white/70 hover:bg-white px-3 py-1.5 rounded-xl border border-brand-blush/40 transition shadow-sm">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+      <span>Hub</span>
+    </a>
+    <span class="text-[11px] font-bold tracking-wider text-brand-plum/50">Área de Acesso</span>
+  </div>
+
+  <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl shadow-brand-plum/10 p-6 sm:p-10 flex flex-col items-center border border-brand-blush/40 relative overflow-hidden">
+    
+    <!-- Decoração de fundo sutil -->
+    <div class="absolute -top-20 -right-20 w-44 h-44 rounded-full bg-brand-mint/30 blur-2xl pointer-events-none"></div>
+    <div class="absolute -bottom-20 -left-20 w-44 h-44 rounded-full bg-brand-blush/40 blur-2xl pointer-events-none"></div>
+
+    <!-- Logo Box -->
+    <div class="w-full flex flex-col items-center justify-center mb-6 text-center relative z-10">
+      <div class="px-4 py-2 flex items-center justify-center">
+        <img src="assets/img/logo_cropped.png" alt="Beauty4You Logo" class="h-16 sm:h-20 object-contain drop-shadow-sm">
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-mint/40 text-brand-mintDark text-[11px] font-bold tracking-wider uppercase mt-2 border border-brand-mintDark/15">
+        <span class="w-2 h-2 rounded-full bg-brand-mintDark animate-pulse"></span>
+        Estética & Bem-Estar
+      </span>
+    </div>
+
+    <!-- Seletor de Perfil de Teste -->
+    <div class="w-full mb-6 bg-brand-softBg p-1.5 rounded-2xl flex text-xs font-semibold text-brand-plum/70 border border-brand-blush/50 relative z-10">
+      <button type="button" onclick="setRole('cliente')" id="btn-cliente" class="flex-1 py-2 rounded-xl bg-brand-primary text-white font-bold shadow-md shadow-brand-primary/30 transition text-xs">Cliente</button>
+      <button type="button" onclick="setRole('funcionario')" id="btn-funcionario" class="flex-1 py-2 rounded-xl text-brand-plum/70 hover:text-brand-plum font-semibold transition text-xs">Profissional</button>
+      <button type="button" onclick="setRole('admin')" id="btn-admin" class="flex-1 py-2 rounded-xl text-brand-plum/70 hover:text-brand-plum font-semibold transition text-xs">Admin</button>
+    </div>
+
+    <!-- Formulário -->
+    <form class="w-full space-y-4 relative z-10" onsubmit="event.preventDefault(); handleLogin();">
+      <div>
+        <label for="email" class="block text-xs font-bold text-brand-plum uppercase tracking-wider mb-1.5">EMAIL DE ACESSO</label>
+        <div class="relative">
+          <input type="email" id="email" required placeholder="DIGITE SEU EMAIL" 
+            class="w-full bg-brand-softBg border border-brand-rose/40 text-brand-plum placeholder-brand-plum/40 text-sm font-medium px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent transition">
+        </div>
+      </div>
+
+      <div>
+        <label for="senha" class="block text-xs font-bold text-brand-plum uppercase tracking-wider mb-1.5">SENHA</label>
+        <div class="relative">
+          <input type="password" id="senha" required placeholder="DIGITE SUA SENHA" 
+            class="w-full bg-brand-softBg border border-brand-rose/40 text-brand-plum placeholder-brand-plum/40 text-sm font-medium px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent transition">
+          <button type="button" onclick="togglePass()" id="togglePassBtn" class="absolute right-3.5 top-3 text-brand-plum/50 hover:text-brand-primary text-xs font-bold uppercase transition">VER</button>
+        </div>
+        <div class="flex justify-end mt-2">
+          <a href="#" onclick="alert('Um link seguro de redefinição foi enviado para seu email.');" class="text-xs font-bold text-brand-primary hover:text-brand-plum tracking-wide uppercase transition">ESQUECEU SENHA?</a>
+        </div>
+      </div>
+
+      <!-- Alerta Simulado de Bloqueio -->
+      <div id="no-show-alert" class="p-3.5 bg-rose-50 border border-rose-200 text-rose-800 rounded-2xl text-xs font-medium space-y-1.5">
+        <div class="flex items-center justify-between font-bold text-rose-900">
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-rose-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            Conta Temporariamente Suspensa
+          </span>
+          <span class="text-[10px] bg-rose-100 text-rose-700 px-2 py-0.5 rounded-full font-bold uppercase">Pendente</span>
+        </div>
+        <p class="text-[11px] leading-relaxed text-rose-700">
+          Identificadas ausências consecutivas sem cancelamento prévio. O agendamento online está pausado para esta conta.
+        </p>
+        <div class="pt-1 flex gap-2">
+          <button type="button" onclick="setRole('cliente_ativo')" class="text-[10px] font-bold text-brand-primary hover:underline bg-white px-2.5 py-1 rounded-lg border border-brand-rose/40">
+            Alternar p/ Cliente Ativo (Regular)
+          </button>
+        </div>
+      </div>
+
+      <!-- Ações -->
+      <div class="pt-2 space-y-3">
+        <button type="submit" 
+          class="w-full bg-brand-primary hover:bg-[#d65784] text-white font-bold py-3.5 rounded-2xl tracking-wider uppercase transition shadow-lg shadow-brand-primary/25 active:scale-[0.99] flex items-center justify-center gap-2">
+          <span>ENTRAR NO SISTEMA</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+        <button type="button" onclick="openRegister()" 
+          class="w-full bg-brand-plum hover:bg-[#2c1f28] text-white font-bold py-3.5 rounded-2xl tracking-wider uppercase transition shadow-md shadow-brand-plum/20 active:scale-[0.99]">
+          CRIAR NOVA CONTA
+        </button>
+      </div>
+    </form>
+
+    <!-- Links diretos para testar o protótipo -->
+    <div class="mt-6 pt-5 border-t border-brand-blush/30 w-full text-center relative z-10">
+      <p class="text-[11px] font-bold text-brand-plum/60 uppercase tracking-wider mb-2">Acesso Rápido:</p>
+      <div class="flex flex-wrap items-center justify-center gap-2 text-xs">
+        <a href="servico.html" class="px-2.5 py-1 rounded-xl bg-brand-softBg hover:bg-brand-rose/20 text-brand-plum font-semibold border border-brand-blush/60 transition">Cliente (Agendar)</a>
+        <a href="agenda.html" class="px-2.5 py-1 rounded-xl bg-brand-softBg hover:bg-brand-rose/20 text-brand-plum font-semibold border border-brand-blush/60 transition">Profissional (Agenda)</a>
+        <a href="admin.html" class="px-2.5 py-1 rounded-xl bg-brand-softBg hover:bg-brand-rose/20 text-brand-plum font-semibold border border-brand-blush/60 transition">Admin (Painel)</a>
+      </div>
+    </div>
+
+    <div class="mt-6 text-center text-xs text-brand-plum/50 font-medium flex items-center gap-1.5 relative z-10">
+      <svg class="w-3.5 h-3.5 text-brand-mintDark shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+      Ambiente seguro com criptografia de ponta a ponta
+    </div>
+  </div>
+
+  <!-- Modal Interativo de Bloqueio por No-Show -->
+  <div id="modalBlocked" class="fixed inset-0 z-50 bg-brand-plum/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-brand-blush/60 space-y-5 text-center relative">
+      <div class="w-16 h-16 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto shadow-inner">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+      </div>
+      <div>
+        <span class="text-[10px] font-extrabold uppercase tracking-widest text-rose-600 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200">
+          Aviso de Suspensão
+        </span>
+        <h3 class="text-xl font-black uppercase text-brand-plum mt-2">Acesso Temporariamente Pausado</h3>
+        <p class="text-xs text-brand-plum/70 leading-relaxed mt-2 font-medium">
+          O cadastro <strong>cliente.penalizado@exemplo.com</strong> atingiu o limite de faltas sem aviso prévio. Para manter o equilíbrio da agenda dos profissionais, novos agendamentos via portal foram pausados.
+        </p>
+      </div>
+
+      <div class="bg-brand-softBg p-3.5 rounded-2xl border border-brand-blush/40 text-left text-xs space-y-1">
+        <p class="font-bold text-brand-plum">Como regularizar?</p>
+        <p class="text-[11px] text-brand-plum/70">Entre em contato com nossa recepção pelo telefone ou WhatsApp (11) 3456-7890 para reativação cadastral imediata.</p>
+      </div>
+
+      <div class="space-y-2 pt-1">
+        <button onclick="window.location.href='servico.html'" class="w-full py-3 bg-brand-primary hover:bg-[#d65784] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition shadow-md shadow-brand-primary/25">
+          Continuar em Modo Demonstração →
+        </button>
+        <button onclick="window.location.href='admin.html'" class="w-full py-2.5 bg-brand-softBg hover:bg-brand-blush/30 text-brand-plum rounded-xl text-xs font-bold uppercase tracking-wider border border-brand-blush/60 transition">
+          Ver Lista de Suspensos no Admin
+        </button>
+        <button onclick="closeModalBlocked()" class="w-full py-2 text-brand-plum/50 hover:text-brand-plum text-xs font-semibold">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botão Flutuante de Menu (Canto Inferior Direito) -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <!-- Popover Menu (Abre exatamente em cima do botão) -->
+    <div id="floatingMenuPopover" class="hidden absolute bottom-14 right-0 w-64 bg-brand-plum/95 backdrop-blur-md text-white rounded-3xl p-3 shadow-2xl border border-brand-blush/30 flex-col space-y-1 transition-all duration-200">
+      <div class="px-3 py-2 border-b border-brand-blush/20 flex items-center justify-between">
+        <span class="text-[10px] font-black uppercase tracking-widest text-brand-blush">Navegação Rápida</span>
+        <button onclick="toggleFloatingMenu()" class="text-brand-blush/60 hover:text-white p-1 rounded-lg text-xs">✕</button>
+      </div>
+      <a href="index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        <span>Hub</span>
+      </a>
+      <a href="login.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-brand-primary text-white text-xs font-bold transition shadow-sm">
+        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        <span>Login</span>
+      </a>
+      <a href="servico.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+        <span>Agendamento Online (Cliente)</span>
+      </a>
+      <a href="agenda.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        <span>Minha Agenda</span>
+      </a>
+      <a href="novo_agendamento.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        <span>Novo Agendamento (Balcão)</span>
+      </a>
+      <a href="disponibilidade.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span>Disponibilidade & Escalas</span>
+      </a>
+      <a href="admin.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        <span>Painel Administrativo</span>
+      </a>
+    </div>
+
+    <!-- Botão Trigger: "Menu" -->
+    <button onclick="toggleFloatingMenu()" id="floatingMenuBtn" class="flex items-center gap-2 bg-brand-plum text-white hover:bg-[#281b24] px-4 py-3 rounded-2xl shadow-2xl border border-brand-blush/40 font-bold text-xs uppercase tracking-wider transition active:scale-95">
+      <svg class="w-4 h-4 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <span>Menu</span>
+    </button>
+  </div>
+
+  <script>
+    let currentRole = 'cliente';
+
+    function setRole(role) {
+      currentRole = role;
+      const isClient = role.startsWith('cliente');
+      
+      ['cliente', 'funcionario', 'admin'].forEach(r => {
+        const btn = document.getElementById(`btn-${r}`);
+        if(r === (isClient ? 'cliente' : role)) {
+          btn.className = "flex-1 py-2 rounded-xl bg-brand-primary text-white font-bold shadow-md shadow-brand-primary/30 transition text-xs";
+        } else {
+          btn.className = "flex-1 py-2 rounded-xl text-brand-plum/70 hover:text-brand-plum font-semibold transition text-xs";
+        }
+      });
+
+      const alertBox = document.getElementById('no-show-alert');
+      if (role === 'cliente') {
+        document.getElementById('email').value = "cliente.penalizado@exemplo.com";
+        document.getElementById('senha').value = "********";
+        alertBox.classList.remove('hidden');
+      } else if (role === 'cliente_ativo') {
+        document.getElementById('email').value = "cliente.ativo@exemplo.com";
+        document.getElementById('senha').value = "********";
+        alertBox.classList.add('hidden');
+      } else {
+        alertBox.classList.add('hidden');
+        document.getElementById('email').value = `${role}@beauty4you.com.br`;
+        document.getElementById('senha').value = "********";
+      }
+    }
+
+    function togglePass() {
+      const p = document.getElementById('senha');
+      const btn = document.getElementById('togglePassBtn');
+      if (p.type === 'password') {
+        p.type = 'text';
+        btn.textContent = 'OCULTAR';
+      } else {
+        p.type = 'password';
+        btn.textContent = 'VER';
+      }
+    }
+
+    function handleLogin() {
+      const email = document.getElementById('email').value.toLowerCase();
+      if (currentRole === 'admin' || email.includes('admin')) {
+        window.location.href = 'admin.html';
+      } else if (currentRole === 'funcionario' || email.includes('funcionario')) {
+        window.location.href = 'agenda.html';
+      } else if (currentRole === 'cliente' && email.includes('penalizado')) {
+        openModalBlocked();
+      } else {
+        window.location.href = 'servico.html';
+      }
+    }
+
+    function openModalBlocked() {
+      const modal = document.getElementById('modalBlocked');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModalBlocked() {
+      const modal = document.getElementById('modalBlocked');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function openRegister() {
+      alert('Cadastro de Novos Clientes e Profissionais: Funcionalidade disponível na próxima atualização.');
+    }
+
+    function toggleFloatingMenu() {
+      const popover = document.getElementById('floatingMenuPopover');
+      if (popover.classList.contains('hidden')) {
+        popover.classList.remove('hidden');
+        popover.classList.add('flex');
+      } else {
+        popover.classList.add('hidden');
+        popover.classList.remove('flex');
+      }
+    }
+
+    document.addEventListener('click', function(e) {
+      const popover = document.getElementById('floatingMenuPopover');
+      const btn = document.getElementById('floatingMenuBtn');
+      if (!popover.contains(e.target) && !btn.contains(e.target) && !popover.classList.contains('hidden')) {
+        popover.classList.add('hidden');
+        popover.classList.remove('flex');
+      }
+    });
+
+    // Inicializa campos padrão
+    setRole('cliente');
+  </script>
+</body>
+</html>

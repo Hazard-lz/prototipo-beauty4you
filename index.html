@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEAUTY4YOU - Sistema de Gestão & Agendamento</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              plum: '#3a2a35',
+              primary: '#e66d98',
+              rose: '#f29bb6',
+              blush: '#f6b7c9',
+              mint: '#c9f2e6',
+              mintDark: '#1c5344',
+              softBg: '#fdf6f8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-[#fdf6f8] via-[#faeaef] to-[#f5dce4] min-h-screen text-brand-plum flex flex-col justify-between selection:bg-brand-primary selection:text-white pb-16">
+
+  <!-- Header Superior -->
+  <header class="bg-white/90 backdrop-blur-md border-b border-brand-blush/40 sticky top-0 z-40 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center">
+          <img src="assets/img/logo_cropped.png" alt="Beauty4You" class="h-9 sm:h-11 object-contain drop-shadow-sm">
+        </a>
+        <span class="hidden sm:inline-flex items-center px-3 py-1 rounded-full bg-brand-mint/50 text-brand-mintDark text-xs font-bold tracking-wide border border-brand-mintDark/15">
+          Estética & Bem-Estar
+        </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="servico.html" class="hidden sm:inline-flex px-3.5 py-2 text-xs font-bold text-brand-plum/80 hover:text-brand-plum transition">
+          Agendamento Online
+        </a>
+        <a href="login.html" class="px-4 py-2 bg-brand-primary hover:bg-[#d65784] text-white rounded-xl text-xs font-bold transition shadow-md shadow-brand-primary/25 flex items-center gap-1.5 active:scale-95">
+          <span>Acessar Sistema</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 w-full space-y-12">
+
+    <!-- Hero Section -->
+    <section class="text-center space-y-5 max-w-3xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white shadow-sm border border-brand-blush/50 text-xs font-bold text-brand-plum">
+        <span class="w-2 h-2 rounded-full bg-brand-primary animate-pulse"></span>
+        <span class="text-brand-plum/80 font-semibold">Plataforma Integrada de Salões & Clínicas</span>
+      </div>
+      
+      <h1 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-brand-plum leading-tight">
+        Gestão completa para o seu espaço de <span class="text-brand-primary">beleza</span>
+      </h1>
+      
+      <p class="text-sm sm:text-base text-brand-plum/75 leading-relaxed font-medium">
+        Conecte seus clientes à equipe com agendamento online inteligente, controle automatizado de intervalos de limpeza, escalas de atendimento e visão financeira em tempo real.
+      </p>
+
+      <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
+        <a href="servico.html" class="px-6 py-3.5 bg-brand-primary hover:bg-[#d65784] text-white rounded-2xl text-xs font-bold uppercase tracking-wider transition shadow-lg shadow-brand-primary/25 active:scale-95 flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+          <span>Agendar Atendimento (Cliente)</span>
+        </a>
+        <a href="novo_agendamento.html" class="px-5 py-3.5 bg-white hover:bg-brand-softBg text-brand-plum rounded-2xl text-xs font-bold uppercase tracking-wider border border-brand-blush/60 transition shadow-sm active:scale-95 flex items-center gap-2">
+          <svg class="w-4 h-4 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          <span>Agendamento Balcão (Equipe)</span>
+        </a>
+        <a href="login.html" class="px-5 py-3.5 bg-brand-softBg hover:bg-brand-blush/30 text-brand-plum rounded-2xl text-xs font-bold uppercase tracking-wider border border-brand-blush/60 transition shadow-sm active:scale-95 flex items-center gap-2">
+          <svg class="w-4 h-4 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          <span>Acesso Restrito</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Módulos do Sistema -->
+    <section class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-brand-blush/40 pb-3">
+        <div>
+          <h2 class="text-lg font-black uppercase tracking-wider text-brand-plum">Módulos da Plataforma</h2>
+          <p class="text-xs text-brand-plum/60 mt-0.5">Explore as interfaces projetadas para cada perfil de usuário</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- Card 1: Cliente / Agendamento -->
+        <a href="servico.html" class="group bg-white rounded-3xl p-6 border border-brand-blush/50 shadow-sm hover:shadow-xl hover:shadow-brand-primary/10 hover:border-brand-primary transition flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-2xl bg-brand-softBg border border-brand-blush/50 flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-brand-primary">Portal do Cliente</span>
+              <h3 class="text-base font-extrabold text-brand-plum mt-0.5 group-hover:text-brand-primary transition">Agendamento Online</h3>
+            </div>
+            <p class="text-xs text-brand-plum/70 leading-relaxed font-medium">
+              Catálogo de serviços com busca dinâmica, cálculo automático de tempo de bancada e reserva em 3 etapas simples.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-brand-blush/20 flex items-center justify-between text-xs font-bold text-brand-primary group-hover:translate-x-1 transition">
+            <span>Abrir Catálogo</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- Card 2: Profissional / Agenda -->
+        <a href="agenda.html" class="group bg-white rounded-3xl p-6 border border-brand-blush/50 shadow-sm hover:shadow-xl hover:shadow-brand-primary/10 hover:border-brand-primary transition flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-2xl bg-brand-softBg border border-brand-blush/50 flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-brand-primary">Área do Profissional</span>
+              <h3 class="text-base font-extrabold text-brand-plum mt-0.5 group-hover:text-brand-primary transition">Minha Agenda Diária</h3>
+            </div>
+            <p class="text-xs text-brand-plum/70 leading-relaxed font-medium">
+              Acompanhamento de atendimentos em tempo real, atualização de status, registro de ausências e bloqueio de horários.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-brand-blush/20 flex items-center justify-between text-xs font-bold text-brand-primary group-hover:translate-x-1 transition">
+            <span>Ver Minha Agenda</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- Card 3: Profissional / Disponibilidade -->
+        <a href="disponibilidade.html" class="group bg-white rounded-3xl p-6 border border-brand-blush/50 shadow-sm hover:shadow-xl hover:shadow-brand-primary/10 hover:border-brand-primary transition flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-2xl bg-brand-softBg border border-brand-blush/50 flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-brand-primary">Configuração de Escalas</span>
+              <h3 class="text-base font-extrabold text-brand-plum mt-0.5 group-hover:text-brand-primary transition">Disponibilidade & Turnos</h3>
+            </div>
+            <p class="text-xs text-brand-plum/70 leading-relaxed font-medium">
+              Definição de jornada semanal, intervalos de descanso, dias de folga e parametrização de tolerância de atrasos.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-brand-blush/20 flex items-center justify-between text-xs font-bold text-brand-primary group-hover:translate-x-1 transition">
+            <span>Configurar Turnos</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- Card 4: Administrador / Painel -->
+        <a href="admin.html" class="group bg-white rounded-3xl p-6 border border-brand-blush/50 shadow-sm hover:shadow-xl hover:shadow-brand-primary/10 hover:border-brand-primary transition flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-2xl bg-brand-softBg border border-brand-blush/50 flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-brand-primary">Gestão Executiva</span>
+              <h3 class="text-base font-extrabold text-brand-plum mt-0.5 group-hover:text-brand-primary transition">Painel Administrativo</h3>
+            </div>
+            <p class="text-xs text-brand-plum/70 leading-relaxed font-medium">
+              Visão macro dos faturamentos, taxas de ocupação, lista geral de agendamentos e controle de clientes com pendências.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-brand-blush/20 flex items-center justify-between text-xs font-bold text-brand-primary group-hover:translate-x-1 transition">
+            <span>Acessar Painel</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Benefícios e Recursos -->
+    <section class="bg-white rounded-3xl p-6 sm:p-8 border border-brand-blush/40 shadow-sm space-y-6">
+      <div>
+        <h3 class="text-sm font-extrabold uppercase tracking-wider text-brand-plum flex items-center gap-2">
+          <svg class="w-4 h-4 text-brand-mintDark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          Recursos Integrados da Plataforma
+        </h3>
+        <p class="text-xs text-brand-plum/60 mt-1">Concebido para garantir fluidez operacional entre profissionais e clientes</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+        <div class="p-4 rounded-2xl bg-brand-softBg border border-brand-blush/30 space-y-1.5">
+          <div class="w-7 h-7 rounded-lg bg-brand-primary/10 text-brand-primary flex items-center justify-center">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h4 class="font-bold text-brand-plum text-sm">Intervalo Higiênico Automático</h4>
+          <p class="text-brand-plum/70 text-[11px] leading-relaxed">Bloqueio automático de 10 minutos após cada procedimento para higienização e organização do espaço.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-brand-softBg border border-brand-blush/30 space-y-1.5">
+          <div class="w-7 h-7 rounded-lg bg-brand-primary/10 text-brand-primary flex items-center justify-center">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h4 class="font-bold text-brand-plum text-sm">Controle de Presença</h4>
+          <p class="text-brand-plum/70 text-[11px] leading-relaxed">Gestão e alerta de faltas não notificadas para proteger o tempo e faturamento dos profissionais.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-brand-softBg border border-brand-blush/30 space-y-1.5">
+          <div class="w-7 h-7 rounded-lg bg-brand-primary/10 text-brand-primary flex items-center justify-center">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <h4 class="font-bold text-brand-plum text-sm">Políticas Claras de Cancelamento</h4>
+          <p class="text-brand-plum/70 text-[11px] leading-relaxed">Cancelamentos e reagendamentos sem taxa permitidos com antecedência mínima de 2 horas.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-brand-softBg border border-brand-blush/30 space-y-1.5">
+          <div class="w-7 h-7 rounded-lg bg-brand-primary/10 text-brand-primary flex items-center justify-center">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          </div>
+          <h4 class="font-bold text-brand-plum text-sm">Acesso por Perfis</h4>
+          <p class="text-brand-plum/70 text-[11px] leading-relaxed">Ambiente autenticado com permissões específicas para clientes, profissionais e administradores.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Rodapé Institucional -->
+  <footer class="text-center text-xs text-brand-plum/50 font-medium py-6 border-t border-brand-blush/30">
+    <p>BEAUTY4YOU • Sistema de Gestão & Agendamento para Estética & Bem-Estar</p>
+  </footer>
+
+  <!-- Botão Flutuante de Menu (Canto Inferior Direito) -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <!-- Popover Menu (Abre exatamente em cima do botão) -->
+    <div id="floatingMenuPopover" class="hidden absolute bottom-14 right-0 w-64 bg-brand-plum/95 backdrop-blur-md text-white rounded-3xl p-3 shadow-2xl border border-brand-blush/30 flex-col space-y-1 transition-all duration-200">
+      <div class="px-3 py-2 border-b border-brand-blush/20 flex items-center justify-between">
+        <span class="text-[10px] font-black uppercase tracking-widest text-brand-blush">Navegação Rápida</span>
+        <button onclick="toggleFloatingMenu()" class="text-brand-blush/60 hover:text-white p-1 rounded-lg text-xs">✕</button>
+      </div>
+      <a href="index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-brand-primary text-white text-xs font-bold transition shadow-sm">
+        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        <span>Hub</span>
+      </a>
+      <a href="login.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        <span>Login</span>
+      </a>
+      <a href="servico.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+        <span>Agendamento Online (Cliente)</span>
+      </a>
+      <a href="agenda.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        <span>Minha Agenda</span>
+      </a>
+      <a href="novo_agendamento.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        <span>Novo Agendamento (Balcão)</span>
+      </a>
+      <a href="disponibilidade.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span>Disponibilidade & Escalas</span>
+      </a>
+      <a href="admin.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        <span>Painel Administrativo</span>
+      </a>
+    </div>
+
+    <!-- Botão Trigger: "Menu" -->
+    <button onclick="toggleFloatingMenu()" id="floatingMenuBtn" class="flex items-center gap-2 bg-brand-plum text-white hover:bg-[#281b24] px-4 py-3 rounded-2xl shadow-2xl border border-brand-blush/40 font-bold text-xs uppercase tracking-wider transition active:scale-95">
+      <svg class="w-4 h-4 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <span>Menu</span>
+    </button>
+  </div>
+
+  <script>
+    function toggleFloatingMenu() {
+      const popover = document.getElementById('floatingMenuPopover');
+      if (popover.classList.contains('hidden')) {
+        popover.classList.remove('hidden');
+        popover.classList.add('flex');
+      } else {
+        popover.classList.add('hidden');
+        popover.classList.remove('flex');
+      }
+    }
+
+    // Fecha ao clicar fora
+    document.addEventListener('click', function(e) {
+      const popover = document.getElementById('floatingMenuPopover');
+      const btn = document.getElementById('floatingMenuBtn');
+      if (!popover.contains(e.target) && !btn.contains(e.target) && !popover.classList.contains('hidden')) {
+        popover.classList.add('hidden');
+        popover.classList.remove('flex');
+      }
+    });
+  </script>
+
+</body>
+</html>

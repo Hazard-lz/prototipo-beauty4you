@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEAUTY4YOU - Agendamento Online</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              plum: '#3a2a35',
+              primary: '#e66d98',
+              rose: '#f29bb6',
+              blush: '#f6b7c9',
+              mint: '#c9f2e6',
+              mintDark: '#1c5344',
+              softBg: '#fdf6f8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style> body { font-family: 'Plus Jakarta Sans', sans-serif; } </style>
+</head>
+<body class="bg-[#faf2f5] min-h-screen text-brand-plum p-3 sm:p-6 lg:p-8 pb-20 selection:bg-brand-primary selection:text-white">
+
+  <div class="max-w-6xl mx-auto space-y-6">
+
+    <!-- Header Geral -->
+    <header class="bg-white rounded-3xl p-4 sm:p-5 border border-brand-blush/40 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center">
+          <img src="assets/img/logo_cropped.png" alt="Beauty4You" class="h-10 sm:h-12 object-contain drop-shadow-sm">
+        </a>
+        <span class="text-xs font-bold text-brand-plum/60 uppercase tracking-widest hidden sm:inline border-l border-brand-blush/60 pl-3">Agendamento Online</span>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-2 text-xs font-bold">
+        <a href="index.html" class="text-brand-plum/70 hover:text-brand-plum uppercase transition px-3 py-1.5 rounded-xl hover:bg-brand-softBg flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          <span>Hub</span>
+        </a>
+        <a href="agenda.html" class="text-brand-plum/70 hover:text-brand-plum uppercase transition px-3 py-1.5 rounded-xl hover:bg-brand-softBg">Minha Agenda</a>
+        <a href="login.html" class="text-brand-primary hover:text-brand-plum uppercase transition flex items-center gap-1 bg-brand-softBg px-3 py-1.5 rounded-xl border border-brand-blush/50">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+          <span>Trocar Perfil</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- ETAPA DO PROCESSO (Stepper Dinâmico) -->
+    <section class="bg-white p-4 rounded-3xl border border-brand-blush/40 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="text-xs font-bold uppercase tracking-wider text-brand-plum/60 flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-brand-primary animate-pulse"></span>
+        ETAPA DO ATENDIMENTO:
+      </div>
+      <div class="flex items-center gap-2 sm:gap-6 text-xs font-extrabold flex-wrap justify-center">
+        <!-- Step 1 Button -->
+        <button onclick="goToStep(1)" id="step-nav-1" class="flex items-center gap-1.5 text-brand-plum border-b-2 border-brand-primary pb-1 transition">
+          <span id="step-badge-1" class="w-5 h-5 rounded-full bg-brand-primary text-white flex items-center justify-center text-[10px]">1</span>
+          <span>ESCOLHER SERVIÇO</span>
+        </button>
+        <!-- Step 2 Button -->
+        <button onclick="goToStep(2)" id="step-nav-2" class="flex items-center gap-1.5 text-brand-plum/40 pb-1 transition">
+          <span id="step-badge-2" class="w-5 h-5 rounded-full bg-brand-softBg text-brand-plum/50 border border-brand-blush/40 flex items-center justify-center text-[10px]">2</span>
+          <span>PROFISSIONAL & DATA</span>
+        </button>
+        <!-- Step 3 Button -->
+        <button onclick="goToStep(3)" id="step-nav-3" class="flex items-center gap-1.5 text-brand-plum/40 pb-1 transition">
+          <span id="step-badge-3" class="w-5 h-5 rounded-full bg-brand-softBg text-brand-plum/50 border border-brand-blush/40 flex items-center justify-center text-[10px]">3</span>
+          <span>CONFIRMAÇÃO</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==================== ETAPA 1: CATÁLOGO DE SERVIÇOS ==================== -->
+    <div id="step-content-1" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Coluna Esquerda: Catálogo -->
+      <section class="lg:col-span-2 space-y-4">
+        <div class="bg-brand-plum text-white p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+          <h2 class="text-sm font-extrabold uppercase tracking-wider flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-brand-mint"></span>
+            CATÁLOGO DE SERVIÇOS
+          </h2>
+          <!-- Barra de Busca -->
+          <div class="w-full sm:w-72">
+            <input type="text" id="searchInput" oninput="filterServices()" placeholder="BUSCAR SERVIÇO..." 
+              class="w-full bg-[#4d3947] text-white placeholder-brand-blush/70 px-4 py-2 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brand-primary border border-[#6e5465]">
+          </div>
+        </div>
+
+        <!-- Grade de Cards de Serviços -->
+        <div id="serviceGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          <!-- Card 1 -->
+          <div class="service-card bg-white p-5 rounded-3xl border border-brand-blush/40 hover:border-brand-primary transition shadow-sm hover:shadow-md flex flex-col justify-between" data-name="corte masculino degrade cabelo" data-price="55" data-duration="35">
+            <div>
+              <div class="flex justify-between items-start gap-2">
+                <h3 class="font-bold text-sm text-brand-plum">Corte Masculino & Degradê</h3>
+                <span class="text-sm font-black text-brand-primary shrink-0">R$ 55,00</span>
+              </div>
+              <p class="text-xs text-brand-plum/70 mt-2">Higienização capilar, corte estilizado e finalização com pomada modeladora.</p>
+              <div class="mt-3 flex items-center gap-2 flex-wrap">
+                <span class="text-[10px] font-bold bg-brand-softBg text-brand-plum px-2.5 py-1 rounded-lg border border-brand-blush/40 flex items-center gap-1">
+                  <svg class="w-3 h-3 text-brand-plum/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  35 min
+                </span>
+                <span class="text-[10px] font-bold bg-brand-mint text-brand-mintDark px-2.5 py-1 rounded-lg">+10m intervalo</span>
+              </div>
+            </div>
+            <button onclick="toggleService('Corte Masculino & Degradê', 55, 35, this)" class="mt-4 w-full py-2.5 bg-brand-softBg hover:bg-brand-primary hover:text-white text-brand-plum font-bold text-xs uppercase rounded-xl border border-brand-blush/60 transition shadow-sm">
+              Selecionar
+            </button>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="service-card bg-white p-5 rounded-3xl border border-brand-blush/40 hover:border-brand-primary transition shadow-sm hover:shadow-md flex flex-col justify-between" data-name="barboterapia tradicional toalha quente barba" data-price="45" data-duration="30">
+            <div>
+              <div class="flex justify-between items-start gap-2">
+                <h3 class="font-bold text-sm text-brand-plum">Barboterapia Tradicional</h3>
+                <span class="text-sm font-black text-brand-primary shrink-0">R$ 45,00</span>
+              </div>
+              <p class="text-xs text-brand-plum/70 mt-2">Vapor de ozônio, toalha aromatizada quente e hidratação de barba com óleos essenciais.</p>
+              <div class="mt-3 flex items-center gap-2 flex-wrap">
+                <span class="text-[10px] font-bold bg-brand-softBg text-brand-plum px-2.5 py-1 rounded-lg border border-brand-blush/40 flex items-center gap-1">
+                  <svg class="w-3 h-3 text-brand-plum/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  30 min
+                </span>
+                <span class="text-[10px] font-bold bg-brand-mint text-brand-mintDark px-2.5 py-1 rounded-lg">+10m intervalo</span>
+              </div>
+            </div>
+            <button onclick="toggleService('Barboterapia Tradicional', 45, 30, this)" class="mt-4 w-full py-2.5 bg-brand-softBg hover:bg-brand-primary hover:text-white text-brand-plum font-bold text-xs uppercase rounded-xl border border-brand-blush/60 transition shadow-sm">
+              Selecionar
+            </button>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="service-card bg-white p-5 rounded-3xl border border-brand-blush/40 hover:border-brand-primary transition shadow-sm hover:shadow-md flex flex-col justify-between" data-name="coloracao tonalizacao tinta raiz mechas" data-price="140" data-duration="60">
+            <div>
+              <div class="flex justify-between items-start gap-2">
+                <h3 class="font-bold text-sm text-brand-plum">Coloração & Tonalização</h3>
+                <span class="text-sm font-black text-brand-primary shrink-0">R$ 140,00</span>
+              </div>
+              <p class="text-xs text-brand-plum/70 mt-2">Aplicação de tinta profissional com teste de mecha e selagem dos fios.</p>
+              <div class="mt-3 flex items-center gap-2 flex-wrap">
+                <span class="text-[10px] font-bold bg-brand-softBg text-brand-plum px-2.5 py-1 rounded-lg border border-brand-blush/40 flex items-center gap-1">
+                  <svg class="w-3 h-3 text-brand-plum/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  60 min
+                </span>
+                <span class="text-[10px] font-bold bg-brand-mint text-brand-mintDark px-2.5 py-1 rounded-lg">+10m intervalo</span>
+              </div>
+            </div>
+            <button onclick="toggleService('Coloração & Tonalização', 140, 60, this)" class="mt-4 w-full py-2.5 bg-brand-softBg hover:bg-brand-primary hover:text-white text-brand-plum font-bold text-xs uppercase rounded-xl border border-brand-blush/60 transition shadow-sm">
+              Selecionar
+            </button>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="service-card bg-white p-5 rounded-3xl border border-brand-blush/40 hover:border-brand-primary transition shadow-sm hover:shadow-md flex flex-col justify-between" data-name="design de sobrancelhas henna rosto olhar" data-price="40" data-duration="25">
+            <div>
+              <div class="flex justify-between items-start gap-2">
+                <h3 class="font-bold text-sm text-brand-plum">Design de Sobrancelhas</h3>
+                <span class="text-sm font-black text-brand-primary shrink-0">R$ 40,00</span>
+              </div>
+              <p class="text-xs text-brand-plum/70 mt-2">Mapeamento facial e aplicação opcional de henna para definição do olhar.</p>
+              <div class="mt-3 flex items-center gap-2 flex-wrap">
+                <span class="text-[10px] font-bold bg-brand-softBg text-brand-plum px-2.5 py-1 rounded-lg border border-brand-blush/40 flex items-center gap-1">
+                  <svg class="w-3 h-3 text-brand-plum/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  25 min
+                </span>
+                <span class="text-[10px] font-bold bg-brand-mint text-brand-mintDark px-2.5 py-1 rounded-lg">+10m intervalo</span>
+              </div>
+            </div>
+            <button onclick="toggleService('Design de Sobrancelhas', 40, 25, this)" class="mt-4 w-full py-2.5 bg-brand-softBg hover:bg-brand-primary hover:text-white text-brand-plum font-bold text-xs uppercase rounded-xl border border-brand-blush/60 transition shadow-sm">
+              Selecionar
+            </button>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="service-card bg-white p-5 rounded-3xl border border-brand-blush/40 hover:border-brand-primary transition shadow-sm hover:shadow-md flex flex-col justify-between" data-name="corte escova modelada lavagem feminina" data-price="130" data-duration="45">
+            <div>
+              <div class="flex justify-between items-start gap-2">
+                <h3 class="font-bold text-sm text-brand-plum">Corte & Escova Modelada</h3>
+                <span class="text-sm font-black text-brand-primary shrink-0">R$ 130,00</span>
+              </div>
+              <p class="text-xs text-brand-plum/70 mt-2">Lavagem terapêutica, corte personalizado com visagismo e escova modelada com fixação suave.</p>
+              <div class="mt-3 flex items-center gap-2 flex-wrap">
+                <span class="text-[10px] font-bold bg-brand-softBg text-brand-plum px-2.5 py-1 rounded-lg border border-brand-blush/40 flex items-center gap-1">
+                  <svg class="w-3 h-3 text-brand-plum/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  45 min
+                </span>
+                <span class="text-[10px] font-bold bg-brand-mint text-brand-mintDark px-2.5 py-1 rounded-lg">+10m intervalo</span>
+              </div>
+            </div>
+            <button onclick="toggleService('Corte & Escova Modelada', 130, 45, this)" class="mt-4 w-full py-2.5 bg-brand-softBg hover:bg-brand-primary hover:text-white text-brand-plum font-bold text-xs uppercase rounded-xl border border-brand-blush/60 transition shadow-sm">
+              Selecionar
+            </button>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="service-card bg-white p-5 rounded-3xl border border-brand-blush/40 hover:border-brand-primary transition shadow-sm hover:shadow-md flex flex-col justify-between" data-name="hidratacao profunda tratamento capilar reposicao" data-price="95" data-duration="40">
+            <div>
+              <div class="flex justify-between items-start gap-2">
+                <h3 class="font-bold text-sm text-brand-plum">Hidratação Profunda & Nutrição</h3>
+                <span class="text-sm font-black text-brand-primary shrink-0">R$ 95,00</span>
+              </div>
+              <p class="text-xs text-brand-plum/70 mt-2">Cronograma com reposição lipídica e máscara nutritiva com touca térmica.</p>
+              <div class="mt-3 flex items-center gap-2 flex-wrap">
+                <span class="text-[10px] font-bold bg-brand-softBg text-brand-plum px-2.5 py-1 rounded-lg border border-brand-blush/40 flex items-center gap-1">
+                  <svg class="w-3 h-3 text-brand-plum/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  40 min
+                </span>
+                <span class="text-[10px] font-bold bg-brand-mint text-brand-mintDark px-2.5 py-1 rounded-lg">+10m intervalo</span>
+              </div>
+            </div>
+            <button onclick="toggleService('Hidratação Profunda & Nutrição', 95, 40, this)" class="mt-4 w-full py-2.5 bg-brand-softBg hover:bg-brand-primary hover:text-white text-brand-plum font-bold text-xs uppercase rounded-xl border border-brand-blush/60 transition shadow-sm">
+              Selecionar
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Coluna Direita: RESUMO DO AGENDAMENTO -->
+      <aside class="space-y-4">
+        <div class="bg-brand-plum text-white p-4 rounded-2xl shadow-sm">
+          <h2 class="text-sm font-black uppercase tracking-wider text-center flex items-center justify-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-brand-rose"></span>
+            RESUMO DO ATENDIMENTO
+          </h2>
+        </div>
+
+        <div class="bg-white p-6 rounded-3xl border border-brand-blush/40 shadow-sm space-y-6">
+          <div>
+            <h3 class="text-xs font-bold text-brand-plum/60 uppercase tracking-wider mb-3">SERVIÇOS SELECIONADOS</h3>
+            <div id="selectedServicesList" class="space-y-2 text-xs">
+              <p class="text-brand-plum/40 italic">Nenhum serviço selecionado ainda.</p>
+            </div>
+          </div>
+
+          <div class="border-t border-brand-blush/20 pt-4 space-y-2 text-xs">
+            <div class="flex justify-between text-brand-plum/70">
+              <span>Duração dos Procedimentos:</span>
+              <span id="txtDuration" class="font-bold text-brand-plum">0 min</span>
+            </div>
+            <div class="flex justify-between text-brand-mintDark font-semibold">
+              <span>Intervalo de Higienização:</span>
+              <span id="txtBuffer" class="font-bold">+0 min</span>
+            </div>
+            <div class="flex justify-between text-brand-plum font-extrabold pt-2 border-t border-dashed border-brand-blush/40">
+              <span>Tempo Total na Grade:</span>
+              <span id="txtTotalTime" class="font-bold">0 min</span>
+            </div>
+          </div>
+
+          <!-- Preço Total -->
+          <div class="border-t border-brand-blush/30 pt-4 bg-brand-softBg -mx-6 -mb-6 p-6 rounded-b-3xl border-b border-l border-r border-brand-blush/40">
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-xs font-bold uppercase tracking-wider text-brand-plum/70">VALOR TOTAL</span>
+              <span id="txtPrice" class="text-2xl font-black text-brand-primary">R$ 0,00</span>
+            </div>
+
+            <!-- Botão Avançar -->
+            <button onclick="goToStep(2)" id="btnStep1" disabled 
+              class="w-full py-3.5 bg-brand-plum/10 text-brand-plum/30 font-bold text-xs uppercase tracking-wider rounded-xl transition cursor-not-allowed">
+              AVANÇAR PARA PROFISSIONAL & DATA →
+            </button>
+            <p class="text-[10px] text-center text-brand-plum/50 mt-3">Cancelamentos sem taxa com até 2h de antecedência.</p>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- ==================== ETAPA 2: PROFISSIONAL & DATA/HORÁRIO ==================== -->
+    <div id="step-content-2" class="hidden space-y-6">
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <div class="lg:col-span-2 space-y-6">
+
+          <!-- 1. Seleção de Profissional -->
+          <section class="bg-white p-6 rounded-3xl border border-brand-blush/40 shadow-sm space-y-4">
+            <h3 class="text-sm font-extrabold uppercase tracking-wider text-brand-plum flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-brand-primary"></span>
+              1. Selecione o Profissional
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Profissional 1 -->
+              <div onclick="selectProfessional('Clara Mendes', 'Cabeleireira Master', 'CM', this)" class="pro-card border-2 border-brand-primary bg-brand-softBg p-4 rounded-2xl cursor-pointer transition shadow-sm flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-brand-primary text-white font-extrabold flex items-center justify-center text-sm shadow-sm shrink-0">CM</div>
+                <div>
+                  <h4 class="font-extrabold text-sm text-brand-plum">Clara Mendes</h4>
+                  <p class="text-xs text-brand-plum/70">Cabeleireira & Visagista Master</p>
+                  <span class="inline-block mt-1 text-[10px] font-bold text-brand-mintDark bg-brand-mint/50 px-2 py-0.5 rounded-full">4.9 estrelas (184 avaliações)</span>
+                </div>
+              </div>
+
+              <!-- Profissional 2 -->
+              <div onclick="selectProfessional('Lucas Viana', 'Barbeiro Especialista', 'LV', this)" class="pro-card border-2 border-brand-blush/40 hover:border-brand-primary/60 bg-white p-4 rounded-2xl cursor-pointer transition shadow-sm flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-brand-plum text-brand-blush font-extrabold flex items-center justify-center text-sm shadow-sm shrink-0">LV</div>
+                <div>
+                  <h4 class="font-extrabold text-sm text-brand-plum">Lucas Viana</h4>
+                  <p class="text-xs text-brand-plum/70">Barbeiro & Terapeuta Capilar</p>
+                  <span class="inline-block mt-1 text-[10px] font-bold text-brand-mintDark bg-brand-mint/50 px-2 py-0.5 rounded-full">4.8 estrelas (120 avaliações)</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 2. Seleção de Data -->
+          <section class="bg-white p-6 rounded-3xl border border-brand-blush/40 shadow-sm space-y-4">
+            <h3 class="text-sm font-extrabold uppercase tracking-wider text-brand-plum flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-brand-primary"></span>
+              2. Escolha o Dia de Atendimento
+            </h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+              <button onclick="selectDate('Quarta-feira, 23 de Setembro', this)" class="date-btn p-3 rounded-2xl border-2 border-brand-primary bg-brand-primary text-white font-bold text-xs transition shadow-md">
+                <span class="block text-[10px] opacity-80 uppercase">Hoje</span>
+                <span class="text-base font-black">23 SET</span>
+                <span class="block text-[10px] opacity-80">Quarta</span>
+              </button>
+              <button onclick="selectDate('Quinta-feira, 24 de Setembro', this)" class="date-btn p-3 rounded-2xl border border-brand-blush/60 hover:border-brand-primary bg-brand-softBg text-brand-plum font-bold text-xs transition">
+                <span class="block text-[10px] text-brand-plum/50 uppercase">Amanhã</span>
+                <span class="text-base font-black">24 SET</span>
+                <span class="block text-[10px] text-brand-plum/60">Quinta</span>
+              </button>
+              <button onclick="selectDate('Sexta-feira, 25 de Setembro', this)" class="date-btn p-3 rounded-2xl border border-brand-blush/60 hover:border-brand-primary bg-brand-softBg text-brand-plum font-bold text-xs transition">
+                <span class="block text-[10px] text-brand-plum/50 uppercase">Disponível</span>
+                <span class="text-base font-black">25 SET</span>
+                <span class="block text-[10px] text-brand-plum/60">Sexta</span>
+              </button>
+              <button onclick="selectDate('Sábado, 26 de Setembro', this)" class="date-btn p-3 rounded-2xl border border-brand-blush/60 hover:border-brand-primary bg-brand-softBg text-brand-plum font-bold text-xs transition">
+                <span class="block text-[10px] text-brand-plum/50 uppercase">Disponível</span>
+                <span class="text-base font-black">26 SET</span>
+                <span class="block text-[10px] text-brand-plum/60">Sábado</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- 3. Seleção de Horário Disponível -->
+          <section class="bg-white p-6 rounded-3xl border border-brand-blush/40 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-sm font-extrabold uppercase tracking-wider text-brand-plum flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-brand-primary"></span>
+                3. Horários Livres (Intervalo de Limpeza Incluso)
+              </h3>
+              <span class="text-[11px] text-brand-mintDark font-bold bg-brand-mint/40 px-2.5 py-0.5 rounded-full">Higienização Garantida</span>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <button onclick="selectTime('09:00', this)" class="time-btn p-3 rounded-xl border-2 border-brand-primary bg-brand-softBg font-extrabold text-sm text-brand-plum transition text-center shadow-sm">
+                09:00
+                <span class="block text-[10px] font-medium text-brand-plum/60 mt-0.5">Disponível</span>
+              </button>
+              <button onclick="selectTime('10:15', this)" class="time-btn p-3 rounded-xl border border-brand-blush/60 hover:border-brand-primary bg-white font-extrabold text-sm text-brand-plum transition text-center">
+                10:15
+                <span class="block text-[10px] font-medium text-brand-plum/60 mt-0.5">Disponível</span>
+              </button>
+              <button onclick="selectTime('11:30', this)" class="time-btn p-3 rounded-xl border border-brand-blush/60 hover:border-brand-primary bg-white font-extrabold text-sm text-brand-plum transition text-center">
+                11:30
+                <span class="block text-[10px] font-medium text-brand-plum/60 mt-0.5">Disponível</span>
+              </button>
+              <button disabled class="p-3 rounded-xl border border-dashed border-brand-blush/30 bg-gray-50 text-brand-plum/30 font-bold text-sm text-center cursor-not-allowed">
+                12:30
+                <span class="block text-[10px] text-amber-700 font-semibold mt-0.5">Horário de Almoço</span>
+              </button>
+              <button onclick="selectTime('14:00', this)" class="time-btn p-3 rounded-xl border border-brand-blush/60 hover:border-brand-primary bg-white font-extrabold text-sm text-brand-plum transition text-center">
+                14:00
+                <span class="block text-[10px] font-medium text-brand-plum/60 mt-0.5">Disponível</span>
+              </button>
+              <button onclick="selectTime('15:30', this)" class="time-btn p-3 rounded-xl border border-brand-blush/60 hover:border-brand-primary bg-white font-extrabold text-sm text-brand-plum transition text-center">
+                15:30
+                <span class="block text-[10px] font-medium text-brand-plum/60 mt-0.5">Disponível</span>
+              </button>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- Coluna Direita: Resumo do Passo 2 -->
+        <aside class="space-y-4">
+          <div class="bg-white p-6 rounded-3xl border border-brand-blush/40 shadow-sm space-y-5">
+            <h3 class="text-xs font-black uppercase tracking-wider text-brand-plum border-b border-brand-blush/30 pb-3 flex items-center justify-between">
+              <span>Agendamento em Montagem</span>
+              <span class="w-2 h-2 rounded-full bg-brand-primary"></span>
+            </h3>
+
+            <div class="space-y-3 text-xs">
+              <div>
+                <span class="text-brand-plum/50 font-bold uppercase text-[10px]">Profissional:</span>
+                <p id="summaryPro" class="font-extrabold text-brand-plum text-sm">Clara Mendes</p>
+              </div>
+              <div>
+                <span class="text-brand-plum/50 font-bold uppercase text-[10px]">Data Escolhida:</span>
+                <p id="summaryDate" class="font-bold text-brand-plum">Quarta-feira, 23 de Setembro</p>
+              </div>
+              <div>
+                <span class="text-brand-plum/50 font-bold uppercase text-[10px]">Horário de Início:</span>
+                <p id="summaryTime" class="font-black text-brand-primary text-base">09:00</p>
+              </div>
+              <div class="pt-2 border-t border-brand-blush/20">
+                <span class="text-brand-plum/50 font-bold uppercase text-[10px]">Tempo Total Bloqueado:</span>
+                <p id="summaryTotalTime" class="font-bold text-brand-plum">-- min</p>
+              </div>
+            </div>
+
+            <div class="pt-2 space-y-2">
+              <button onclick="goToStep(3)" class="w-full py-3.5 bg-brand-primary hover:bg-[#d65784] text-white font-bold text-xs uppercase tracking-wider rounded-xl transition shadow-md shadow-brand-primary/25 active:scale-95">
+                Revisar & Confirmar →
+              </button>
+              <button onclick="goToStep(1)" class="w-full py-2.5 bg-brand-softBg hover:bg-brand-blush/30 text-brand-plum font-bold text-xs uppercase rounded-xl border border-brand-blush/60 transition">
+                ← Voltar aos Serviços
+              </button>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+
+    </div>
+
+    <!-- ==================== ETAPA 3: REVISÃO & CONFIRMAÇÃO ==================== -->
+    <div id="step-content-3" class="hidden space-y-6">
+
+      <div class="max-w-2xl mx-auto bg-white rounded-3xl p-6 sm:p-8 border border-brand-blush/50 shadow-md space-y-6">
+        
+        <div class="text-center pb-4 border-b border-brand-blush/30">
+          <span class="text-[11px] font-extrabold uppercase px-3 py-1 rounded-full bg-brand-mint text-brand-mintDark">
+            Etapa Final • Confirmação do Atendimento
+          </span>
+          <h2 class="text-xl sm:text-2xl font-black uppercase text-brand-plum mt-3">Revisão do seu Agendamento</h2>
+          <p class="text-xs text-brand-plum/70 mt-1 font-medium">Verifique todos os dados antes de concluir a sua reserva.</p>
+        </div>
+
+        <!-- Dados do Cliente -->
+        <div class="p-4 rounded-2xl bg-brand-softBg border border-brand-blush/40 flex items-center justify-between">
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-brand-plum/50">Cliente</span>
+            <h4 class="font-extrabold text-sm text-brand-plum">Mariana Bastos</h4>
+            <p class="text-[11px] text-brand-plum/60">(11) 98844-2121 • mariana.bastos@exemplo.com</p>
+          </div>
+          <span class="text-[10px] font-bold bg-brand-mint/60 text-brand-mintDark px-2.5 py-1 rounded-full">Conta Regular</span>
+        </div>
+
+        <!-- Detalhes da Reserva -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          <div class="p-4 rounded-2xl border border-brand-blush/30 bg-white">
+            <span class="text-[10px] font-bold uppercase text-brand-plum/50">Profissional Responsável</span>
+            <p id="confirmPro" class="font-black text-sm text-brand-plum mt-0.5">Clara Mendes</p>
+            <p class="text-[11px] text-brand-plum/60">Unidade Matriz - Sala 02</p>
+          </div>
+          <div class="p-4 rounded-2xl border border-brand-blush/30 bg-white">
+            <span class="text-[10px] font-bold uppercase text-brand-plum/50">Data e Horário</span>
+            <p id="confirmDateTime" class="font-black text-sm text-brand-primary mt-0.5">23/09 às 09:00</p>
+            <p id="confirmBufferNotice" class="text-[11px] text-brand-mintDark font-semibold">Término previsto com intervalo</p>
+          </div>
+        </div>
+
+        <!-- Lista de Serviços na Confirmação -->
+        <div class="space-y-2 border-t border-brand-blush/20 pt-4">
+          <span class="text-xs font-bold text-brand-plum/60 uppercase tracking-wider">Itens do Agendamento:</span>
+          <div id="confirmServicesList" class="space-y-2 text-xs"></div>
+        </div>
+
+        <!-- Total Financeiro & Tempo -->
+        <div class="p-4 rounded-2xl bg-brand-softBg border border-brand-blush/40 flex items-center justify-between">
+          <div>
+            <span class="text-xs text-brand-plum/60 font-semibold">Tempo Total: <strong id="confirmDuration" class="text-brand-plum">--</strong></span>
+            <p class="text-[11px] text-brand-mintDark font-bold">+10 min intervalo higiênico</p>
+          </div>
+          <div class="text-right">
+            <span class="text-[10px] uppercase font-bold text-brand-plum/50 block">Valor a Pagar:</span>
+            <span id="confirmTotalPrice" class="text-2xl font-black text-brand-primary">R$ 0,00</span>
+          </div>
+        </div>
+
+        <!-- Aceite de Termos -->
+        <div class="flex items-start gap-2.5 p-3 rounded-xl bg-amber-50 border border-amber-200/80 text-amber-900 text-xs">
+          <input type="checkbox" id="termsCheck" checked class="mt-0.5 rounded text-brand-primary focus:ring-brand-primary w-4 h-4">
+          <label for="termsCheck" class="text-[11px] leading-relaxed">
+            Estou ciente de que cancelamentos ou reagendamentos devem ser realizados com pelo menos <strong>2 horas de antecedência</strong> sem aplicação de taxa.
+          </label>
+        </div>
+
+        <!-- Ações Finais -->
+        <div class="pt-2 flex flex-col sm:flex-row gap-3">
+          <button type="button" onclick="goToStep(2)" class="sm:flex-1 py-3.5 bg-brand-softBg hover:bg-brand-blush/30 text-brand-plum rounded-xl font-bold text-xs uppercase transition border border-brand-blush/60">
+            ← Voltar & Alterar
+          </button>
+          <button type="button" onclick="finalizeBooking()" class="sm:flex-2 py-3.5 bg-brand-primary hover:bg-[#d65784] text-white rounded-xl font-black text-xs uppercase tracking-wider transition shadow-lg shadow-brand-primary/25 active:scale-95 flex items-center justify-center gap-2">
+            <span>CONFIRMAR AGENDAMENTO</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Modal de Celebração de Sucesso -->
+  <div id="modalSuccess" class="fixed inset-0 z-50 bg-brand-plum/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-brand-blush/50 space-y-5 text-center relative">
+      <div class="w-16 h-16 rounded-full bg-brand-mint text-brand-mintDark flex items-center justify-center mx-auto shadow-inner">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+      </div>
+      <div>
+        <span class="text-[10px] font-black uppercase tracking-widest text-brand-mintDark bg-brand-mint/50 px-3 py-1 rounded-full border border-brand-mintDark/15">
+          Agendamento Confirmado
+        </span>
+        <h3 class="text-2xl font-black uppercase text-brand-plum mt-3">Tudo Pronto!</h3>
+        <p class="text-xs text-brand-plum/70 leading-relaxed mt-2 font-medium">
+          Sua reserva foi concluída com sucesso e o horário já está garantido na agenda do profissional.
+        </p>
+      </div>
+
+      <div class="bg-brand-softBg p-4 rounded-2xl border border-brand-blush/40 text-left text-xs space-y-1.5">
+        <div class="flex justify-between">
+          <span class="text-brand-plum/60">Código:</span>
+          <span class="font-extrabold text-brand-plum">#BY4-9842</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-brand-plum/60">Profissional:</span>
+          <span id="modalSuccessPro" class="font-bold text-brand-plum">Clara Mendes</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-brand-plum/60">Data & Hora:</span>
+          <span id="modalSuccessDateTime" class="font-bold text-brand-primary">23/09 às 09:00</span>
+        </div>
+      </div>
+
+      <div class="space-y-2 pt-2">
+        <a href="agenda.html" class="block w-full py-3 bg-brand-plum hover:bg-[#281b24] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition shadow-md shadow-brand-plum/20">
+          Visualizar na Agenda do Profissional →
+        </a>
+        <a href="admin.html" class="block w-full py-2.5 bg-brand-softBg hover:bg-brand-rose/20 text-brand-plum rounded-xl text-xs font-bold uppercase tracking-wider border border-brand-blush/60 transition">
+          Ver no Dashboard Administrativo
+        </a>
+        <button onclick="resetBooking()" class="w-full py-2 text-brand-primary hover:text-brand-plum text-xs font-bold uppercase tracking-wider">
+          Realizar Outro Agendamento
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botão Flutuante de Menu (Canto Inferior Direito) -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <!-- Popover Menu (Abre exatamente em cima do botão) -->
+    <div id="floatingMenuPopover" class="hidden absolute bottom-14 right-0 w-64 bg-brand-plum/95 backdrop-blur-md text-white rounded-3xl p-3 shadow-2xl border border-brand-blush/30 flex-col space-y-1 transition-all duration-200">
+      <div class="px-3 py-2 border-b border-brand-blush/20 flex items-center justify-between">
+        <span class="text-[10px] font-black uppercase tracking-widest text-brand-blush">Navegação Rápida</span>
+        <button onclick="toggleFloatingMenu()" class="text-brand-blush/60 hover:text-white p-1 rounded-lg text-xs">✕</button>
+      </div>
+      <a href="index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        <span>Hub</span>
+      </a>
+      <a href="login.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        <span>Login</span>
+      </a>
+      <a href="servico.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-brand-primary text-white text-xs font-bold transition shadow-sm">
+        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+        <span>Agendamento Online (Cliente)</span>
+      </a>
+      <a href="agenda.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        <span>Minha Agenda</span>
+      </a>
+      <a href="novo_agendamento.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        <span>Novo Agendamento (Balcão)</span>
+      </a>
+      <a href="disponibilidade.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span>Disponibilidade & Escalas</span>
+      </a>
+      <a href="admin.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-xs font-bold transition">
+        <svg class="w-4 h-4 text-brand-rose shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        <span>Painel Administrativo</span>
+      </a>
+    </div>
+
+    <!-- Botão Trigger: "Menu" -->
+    <button onclick="toggleFloatingMenu()" id="floatingMenuBtn" class="flex items-center gap-2 bg-brand-plum text-white hover:bg-[#281b24] px-4 py-3 rounded-2xl shadow-2xl border border-brand-blush/40 font-bold text-xs uppercase tracking-wider transition active:scale-95">
+      <svg class="w-4 h-4 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <span>Menu</span>
+    </button>
+  </div>
+
+  <script>
+    let selected = [];
+    let currentStep = 1;
+    let chosenPro = 'Clara Mendes';
+    let chosenDate = 'Quarta-feira, 23 de Setembro';
+    let chosenTime = '09:00';
+
+    function filterServices() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      document.querySelectorAll('.service-card').forEach(card => {
+        const name = card.dataset.name;
+        card.style.display = name.includes(q) ? 'flex' : 'none';
+      });
+    }
+
+    function toggleService(name, price, duration, btn) {
+      const idx = selected.findIndex(s => s.name === name);
+      if (idx >= 0) {
+        selected.splice(idx, 1);
+        btn.textContent = "Selecionar";
+        btn.className = "mt-4 w-full py-2.5 bg-brand-softBg hover:bg-brand-primary hover:text-white text-brand-plum font-bold text-xs uppercase rounded-xl border border-brand-blush/60 transition shadow-sm";
+      } else {
+        selected.push({ name, price, duration });
+        btn.textContent = "✓ Selecionado";
+        btn.className = "mt-4 w-full py-2.5 bg-brand-primary text-white font-bold text-xs uppercase rounded-xl transition shadow-md shadow-brand-primary/30";
+      }
+      renderSummary();
+    }
+
+    function renderSummary() {
+      const list = document.getElementById('selectedServicesList');
+      const btn1 = document.getElementById('btnStep1');
+
+      if (selected.length === 0) {
+        list.innerHTML = `<p class="text-brand-plum/40 italic">Nenhum serviço selecionado ainda.</p>`;
+        document.getElementById('txtDuration').textContent = "0 min";
+        document.getElementById('txtBuffer').textContent = "+0 min";
+        document.getElementById('txtTotalTime').textContent = "0 min";
+        document.getElementById('txtPrice').textContent = "R$ 0,00";
+        btn1.disabled = true;
+        btn1.className = "w-full py-3.5 bg-brand-plum/10 text-brand-plum/30 font-bold text-xs uppercase tracking-wider rounded-xl transition cursor-not-allowed";
+        return;
+      }
+
+      list.innerHTML = selected.map(s => `
+        <div class="flex justify-between items-center py-1.5 border-b border-brand-blush/20">
+          <span class="font-bold text-brand-plum">${s.name}</span>
+          <span class="font-black text-brand-primary">R$ ${s.price.toFixed(2)}</span>
+        </div>
+      `).join('');
+
+      const totalExec = selected.reduce((acc, s) => acc + s.duration, 0);
+      const buffer = 10;
+      const totalCost = selected.reduce((acc, s) => acc + s.price, 0);
+
+      document.getElementById('txtDuration').textContent = `${totalExec} min`;
+      document.getElementById('txtBuffer').textContent = `+${buffer} min`;
+      document.getElementById('txtTotalTime').textContent = `${totalExec + buffer} min`;
+      document.getElementById('txtPrice').textContent = `R$ ${totalCost.toFixed(2)}`;
+
+      btn1.disabled = false;
+      btn1.className = "w-full py-3.5 bg-brand-primary hover:bg-[#d65784] text-white font-bold text-xs uppercase tracking-wider rounded-xl transition shadow-lg shadow-brand-primary/25 active:scale-[0.99]";
+
+      document.getElementById('summaryTotalTime').textContent = `${totalExec + buffer} min`;
+      document.getElementById('confirmDuration').textContent = `${totalExec} min de execução`;
+      document.getElementById('confirmTotalPrice').textContent = `R$ ${totalCost.toFixed(2)}`;
+    }
+
+    function goToStep(step) {
+      if (step > 1 && selected.length === 0) {
+        alert('Por favor, selecione ao menos um serviço no catálogo para prosseguir.');
+        return;
+      }
+
+      currentStep = step;
+      [1, 2, 3].forEach(s => {
+        const content = document.getElementById(`step-content-${s}`);
+        const nav = document.getElementById(`step-nav-${s}`);
+        const badge = document.getElementById(`step-badge-${s}`);
+
+        if (s === step) {
+          content.classList.remove('hidden');
+          nav.className = "flex items-center gap-1.5 text-brand-plum border-b-2 border-brand-primary pb-1 transition font-black";
+          badge.className = "w-5 h-5 rounded-full bg-brand-primary text-white flex items-center justify-center text-[10px]";
+        } else if (s < step) {
+          content.classList.add('hidden');
+          nav.className = "flex items-center gap-1.5 text-brand-mintDark pb-1 transition font-bold";
+          badge.className = "w-5 h-5 rounded-full bg-brand-mint text-brand-mintDark flex items-center justify-center text-[10px]";
+          badge.textContent = "✓";
+        } else {
+          content.classList.add('hidden');
+          nav.className = "flex items-center gap-1.5 text-brand-plum/40 pb-1 transition font-semibold";
+          badge.className = "w-5 h-5 rounded-full bg-brand-softBg text-brand-plum/50 border border-brand-blush/40 flex items-center justify-center text-[10px]";
+          badge.textContent = s;
+        }
+      });
+
+      if (step === 3) {
+        prepareStep3();
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function selectProfessional(name, role, initials, el) {
+      chosenPro = name;
+      document.querySelectorAll('.pro-card').forEach(c => {
+        c.className = "pro-card border-2 border-brand-blush/40 hover:border-brand-primary/60 bg-white p-4 rounded-2xl cursor-pointer transition shadow-sm flex items-center gap-4";
+      });
+      el.className = "pro-card border-2 border-brand-primary bg-brand-softBg p-4 rounded-2xl cursor-pointer transition shadow-sm flex items-center gap-4";
+      document.getElementById('summaryPro').textContent = name;
+    }
+
+    function selectDate(dateStr, el) {
+      chosenDate = dateStr;
+      document.querySelectorAll('.date-btn').forEach(b => {
+        b.className = "date-btn p-3 rounded-2xl border border-brand-blush/60 hover:border-brand-primary bg-brand-softBg text-brand-plum font-bold text-xs transition";
+      });
+      el.className = "date-btn p-3 rounded-2xl border-2 border-brand-primary bg-brand-primary text-white font-bold text-xs transition shadow-md";
+      document.getElementById('summaryDate').textContent = dateStr;
+    }
+
+    function selectTime(timeStr, el) {
+      chosenTime = timeStr;
+      document.querySelectorAll('.time-btn').forEach(b => {
+        b.className = "time-btn p-3 rounded-xl border border-brand-blush/60 hover:border-brand-primary bg-white font-extrabold text-sm text-brand-plum transition text-center";
+      });
+      el.className = "time-btn p-3 rounded-xl border-2 border-brand-primary bg-brand-softBg font-extrabold text-sm text-brand-plum transition text-center shadow-sm";
+      document.getElementById('summaryTime').textContent = timeStr;
+    }
+
+    function prepareStep3() {
+      document.getElementById('confirmPro').textContent = chosenPro;
+      document.getElementById('confirmDateTime').textContent = `${chosenDate} às ${chosenTime}`;
+      
+      const list3 = document.getElementById('confirmServicesList');
+      list3.innerHTML = selected.map(s => `
+        <div class="flex justify-between items-center py-1 border-b border-brand-blush/20">
+          <span class="font-bold text-brand-plum">${s.name} (${s.duration}m)</span>
+          <span class="font-black text-brand-primary">R$ ${s.price.toFixed(2)}</span>
+        </div>
+      `).join('');
+    }
+
+    function finalizeBooking() {
+      const terms = document.getElementById('termsCheck');
+      if (!terms.checked) {
+        alert('Por favor, confirme o aceite da política de cancelamento para prosseguir.');
+        return;
+      }
+
+      document.getElementById('modalSuccessPro').textContent = chosenPro;
+      document.getElementById('modalSuccessDateTime').textContent = `${chosenDate} às ${chosenTime}`;
+      
+      const modal = document.getElementById('modalSuccess');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function resetBooking() {
+      selected = [];
+      document.querySelectorAll('.service-card button').forEach(b => {
+        b.textContent = "Selecionar";
+        b.className = "mt-4 w-full py-2.5 bg-brand-softBg hover:bg-brand-primary hover:text-white text-brand-plum font-bold text-xs uppercase rounded-xl border border-brand-blush/60 transition shadow-sm";
+      });
+      renderSummary();
+      document.getElementById('modalSuccess').classList.add('hidden');
+      document.getElementById('modalSuccess').classList.remove('flex');
+      goToStep(1);
+    }
+
+    function toggleFloatingMenu() {
+      const popover = document.getElementById('floatingMenuPopover');
+      if (popover.classList.contains('hidden')) {
+        popover.classList.remove('hidden');
+        popover.classList.add('flex');
+      } else {
+        popover.classList.add('hidden');
+        popover.classList.remove('flex');
+      }
+    }
+
+    document.addEventListener('click', function(e) {
+      const popover = document.getElementById('floatingMenuPopover');
+      const btn = document.getElementById('floatingMenuBtn');
+      if (!popover.contains(e.target) && !btn.contains(e.target) && !popover.classList.contains('hidden')) {
+        popover.classList.add('hidden');
+        popover.classList.remove('flex');
+      }
+    });
+
+    renderSummary();
+  </script>
+</body>
+</html>

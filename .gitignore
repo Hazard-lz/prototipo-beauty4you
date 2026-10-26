@@ -1,0 +1,9 @@
+# Backup original
+backup_original/
+
+# Sistema Operacional e Editores
+.DS_Store
+Thumbs.db
+*.tmp
+.vscode/
+.idea/
